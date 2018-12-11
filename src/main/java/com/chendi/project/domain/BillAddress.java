@@ -2,6 +2,8 @@ package com.chendi.project.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name="bill_address")
 public class BillAddress {

@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.sql.Date;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name="orders")
 public class Orders {
