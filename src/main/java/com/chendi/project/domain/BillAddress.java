@@ -16,7 +16,7 @@ public class BillAddress {
     @Column
     String address2;
     @Column(name="zip_code")
-    Number zipCode;
+    Integer zipCode;
     @Column
     String city;
     @Column
@@ -24,6 +24,6 @@ public class BillAddress {
     @Column
     String country;
     @Column(name="phone_number")
-    Number phoneNum;
+    Integer phoneNum;
 
 }

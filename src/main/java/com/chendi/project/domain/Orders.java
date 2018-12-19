@@ -3,6 +3,7 @@ package com.chendi.project.domain;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -17,11 +18,11 @@ public class Orders {
     @Column(name="order_date")
     Date orderDate;
     @Column
-    Number quantity;
-    @Column(name="order_price")
-    Number orderPrice;
+    Integer quantity;
+    @Column(name="order_total")
+    BigDecimal orderTotal;
     @Column(name="payment_id")
-    Number paymentId;
+    Long paymentId;
     @Column(name="paid_date")
     Date paidDate;
     @Column(name="users_id")

@@ -10,7 +10,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name="payments")
 public class Payments{
     @Column(name = "card_number")
-    Number cardNumber;
+    Integer cardNumber;
     @Column(name = "card_type")
     String cardType;
     @Column(name = "holder_first_name")

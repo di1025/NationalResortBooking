@@ -19,8 +19,12 @@ public class Users {
     String firstName;
     @Column(name="last_name")
     String lastName;
-    @Column(name="username")
+    @Column
     String username;
+    @Column
+    String email;
+    @Column
+    int phone;
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_id_seq")
     @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq")

@@ -1,0 +1,1 @@
+-- ALTER TABLE Orders ALTER COLUMN orderPrice TYPE numeric (10,2);
