@@ -7,6 +7,7 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.sound.midi.Sequence;
 import javax.sql.DataSource;
+import java.util.List;
 import java.util.Properties;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -14,7 +15,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="users")
-public class Users {
+public class User {
     @Column(name="first_name")
     String firstName;
     @Column(name="last_name")
@@ -29,6 +30,11 @@ public class Users {
     @GeneratedValue(strategy = SEQUENCE,generator = "users_id_seq")
     @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq")
     private Long id;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Order> orders;
 
 
 }
+
+//string1.equals(string2)
+//int1 == int2

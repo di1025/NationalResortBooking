@@ -5,12 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="orders")
-public class Orders {
+public class Order {
     @Id
     @GeneratedValue(strategy =SEQUENCE,generator = "orders_id_seq")
     @SequenceGenerator(name="orders_id_seq",sequenceName="orders_id_seq")
@@ -21,17 +22,14 @@ public class Orders {
     Integer quantity;
     @Column(name="order_total")
     BigDecimal orderTotal;
-    @Column(name="payment_id")
-    Long paymentId;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
+//    @Column(name="payment_id")
+    private List<Payment> payments;
     @Column(name="paid_date")
     Date paidDate;
-    @Column(name="users_id")
-    Long usersId;
-    @Column(name="bill_address_id")
-    Long billAddressId;
-
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="users_id")
+    private User user;
 
 }
 
