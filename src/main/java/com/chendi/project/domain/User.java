@@ -25,7 +25,7 @@ public class User {
     @Column
     String email;
     @Column
-    int phone;
+    String phone;
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_id_seq")
     @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq")
