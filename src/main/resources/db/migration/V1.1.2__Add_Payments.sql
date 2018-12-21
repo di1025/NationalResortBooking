@@ -19,6 +19,5 @@ create table payments (
      REFERENCES orders (id)
      ON DELETE NO ACTION
      ON UPDATE NO ACTION
-
 );
 ALTER SEQUENCE payments_id_seq OWNED BY payments.id;

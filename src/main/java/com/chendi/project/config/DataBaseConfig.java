@@ -41,16 +41,15 @@ public class DataBaseConfig {
     @Bean(name="entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-
         factoryBean.setDataSource(getDataSource());
         factoryBean.setPackagesToScan(new String[] { "com.chendi.project.domain","com.chendi.project.repository" });
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
-        props.put("hibernate.hbm2ddl.auto", "validate");
+        props.put("hibernate.hbm2ddl.auto", "validate");// helps to validate table names and cols to the java class
 //        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
         props.put("hibernate.connection.charSet","UTF-8");
-        props.put("hibernate.show_sql","true");
+        props.put("hibernate.show_sql","true");// helps to debug to see the sql query in the log
 //        props.put("")
 
 
