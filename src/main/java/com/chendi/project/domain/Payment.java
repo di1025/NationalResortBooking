@@ -39,5 +39,15 @@ public class Payment {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    public void setCardNumber(Integer cardNumber){ this.cardNumber=cardNumber;}
+    public Integer getCardNumber(){return this.cardNumber;}
+
+    public void setCardType(String cardType){ this.cardType=cardType;}
+    public String getcardType(){return this.cardType;}
+
+    public void setHolderFristName(String cardType){ this.holderFristName=holderFristName;}
+    public String getHolderFristName(){return this.holderFristName;}
+
+
 
 }

@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UsersRepository extends CrudRepository<User,Long> {
+public interface UserRepository extends CrudRepository<User,Long> {
     List<User> findByLastnameOrFirstname(String holderFristName, String holderLastName);
 
     @Query("select u from users where u.phone =?1")

@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrdersRepository extends CrudRepository<Order,Long> {
+public interface OrderRepository extends CrudRepository<Order,Long> {
+
     Optional<Order> findById(Long id);
 
     @Query("select o from orders where order_date >?1")

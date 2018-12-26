@@ -4,25 +4,49 @@ package com.chendi.project.config;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.DataSourceConnectionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.sql.DataSource;
+import javax.xml.ws.Action;
 import java.util.Properties;
 
 @Configuration
 public class DataBaseConfig {
-    protected String databaseUrl="jdbc:postgresql://localhost:5432/pigge";
-    protected String databaseUserName="DiChen";
-    protected String databasePassword="password123";
-    protected String driverClassName="org.postgresql.ds.PGSimpleDataSource";
+//    protected String databaseUrl="jdbc:postgresql://localhost:5432/pigge";
+//    protected String databaseUserName="DiChen";
+//    protected String databasePassword="password123";
+//    protected String driverClassName="org.postgresql.ds.PGSimpleDataSource";
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private Environment environment;
+
+    @Value("#{ applicationProperties['database.serverName'] }")
+    protected String databaseUrl;
+
+    @Value("#{ applicationProerties['database.username'] }")
+    protected String databaseUsername="";
+
+    @Value("#{ applicationProperties['database.password'] }")
+    protected String databasePassword="";
+
+    @Value("#{ applicationProperties['database.dataSourceClassName'] }")
+    protected String driverClassName="";
+
+
 
     private BasicDataSource createDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(databaseUrl);
-        dataSource.setUsername(databaseUserName);
+        dataSource.setUsername(databaseUsername);
         dataSource.setPassword(databasePassword);
 //        dataSource.setValidationQuery(databaseValidationQuery);
         dataSource.setTestOnBorrow(true);

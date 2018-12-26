@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -30,6 +30,17 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private User user;
+
+    public void setOrderDate(Date orderDate){ this.orderDate=orderDate;}
+    public Date getOrderDate(){return this.orderDate;}
+
+    public void setoOrderTotal(BigDecimal orderTotal){ this.orderTotal=orderTotal;}
+    public BigDecimal getOrderTotal(){return this.orderTotal;}
+
+    public void setPaidDate(Date paidDate){ this.paidDate=paidDate;}
+    public Date getPaidDate(){return this.paidDate;}
+
+
 
 }
 
