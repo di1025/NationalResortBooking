@@ -50,6 +50,6 @@ public class User {
 
     public List<Order> getOrders() { return orders; }
 
-    public Long getID(){return this.id;}
+    public Long getId(){return this.id;}
 }
 

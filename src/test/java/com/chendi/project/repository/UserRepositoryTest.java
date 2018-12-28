@@ -1,6 +1,7 @@
 package com.chendi.project.repository;
 
 import com.chendi.project.config.AppConfig;
+import com.chendi.project.domain.Order;
 import com.chendi.project.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @WebAppConfiguration
@@ -25,14 +28,37 @@ import static org.junit.Assert.assertTrue;
 @ActiveProfiles("unit")
 public class UserRepositoryTest {
 //    private final Logger logger = LoggerFactory.getLogger(getClass());
-//    @Autowired
-//    private UserRepository userRepository;
-//    @Test
-////    @Transactional
-//    public void findByIdTest() {
-//        logger.debug("run findByIdTest");
-//        assertTrue(false);
-//    }
+    @Autowired
+    private UserRepository userRepository;
+    @Test
+    @Transactional
+    public void findByPhoneNumberTest(){
+        User u = new User();
+        u.setEmail("testEmail@test.com");
+        u.setFirstName("TestFN");
+        u.setLastName("TestLN");
+        u.setUsername("TestUserName");
+        u.setPhone("88888888");
+        userRepository.save(u);
+        List<User> testUsers = userRepository.findByPhoneNumber(u.getPhone());
+        assertNotNull(testUsers);
+        assertEquals(u.getId(),testUsers.get(0).getId());
+
+    }
+    @Test
+    @Transactional
+    public void findByLastnameOrFirstnameTest(){
+        User u = new User();
+        u.setEmail("testEmail@test.com");
+        u.setFirstName("TestFN");
+        u.setLastName("TestLN");
+        u.setUsername("TestUserName");
+        u.setPhone("88888888");
+        userRepository.save(u);
+        List<User> testUsers = userRepository.findByLastnameOrFirstname(u.getFirstName(),u.getLastName());
+        assertNotNull(testUsers);
+        assertEquals(u.getId(),testUsers.get(0).getId());
+    }
 }
 
 

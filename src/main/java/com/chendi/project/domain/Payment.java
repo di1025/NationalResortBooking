@@ -21,7 +21,7 @@ public class Payment {
     @Column(name = "card_type")
     String cardType;
     @Column(name = "holder_first_name")
-    String holderFristName;
+    String holderFirstName;
     @Column(name = "holder_last_name")
     String holderLastName;
     @Column(name = "billing_address1")
@@ -48,8 +48,8 @@ public class Payment {
     public void setCardType(String cardType){ this.cardType=cardType;}
     public String getcardType(){return this.cardType;}
 
-    public void setHolderFristName(String cardType){ this.holderFristName=holderFristName;}
-    public String getHolderFristName(){return this.holderFristName;}
+    public void setHolderFirstName(String cardType){ this.holderFirstName=holderFirstName;}
+    public String getHolderFirstName(){return this.holderFirstName;}
 
     public void setHolderLastName(String holderLastName){ this.holderLastName=holderLastName;}
     public String getHolderLastName(){return this.holderLastName;}
@@ -75,6 +75,8 @@ public class Payment {
     public void setBillingPhoneNum(String billingPhoneNum){ this.billingPhoneNum=billingPhoneNum;}
     public String getBillingPhoneNum(){return this.billingPhoneNum;}
 
-    public Order getOrder(){return order;}
+    public Long getOrderId(){return order.getId();}
+
+    public Long getId(){return this.id;}
 
 }

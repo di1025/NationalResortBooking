@@ -9,8 +9,9 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends CrudRepository<User,Long> {
-//    List<User> findByLastnameOrFirstname(String holderFristName, String holderLastName);
-//
-//    @Query("select u from users where u.phone =?1")
-//    List<User> findByPhoneNumber(String phone);
+    @Query("select u from User u where u.firstName=?1 or u.lastName=?2")
+    List<User> findByLastnameOrFirstname(String holderFristName, String holderLastName);
+
+    @Query("select u from User u where u.phone =?1")
+    List<User> findByPhoneNumber(String phone);
 }
