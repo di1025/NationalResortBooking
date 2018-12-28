@@ -4,7 +4,8 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -17,7 +18,7 @@ public class Order {
     @SequenceGenerator(name="orders_id_seq",sequenceName="orders_id_seq",allocationSize=1)
     private Long id;
     @Column(name="order_date")
-    Date orderDate;
+    Instant orderDate;
     @Column
     Integer quantity;
     @Column(name="order_total")
@@ -26,19 +27,30 @@ public class Order {
 //    @Column(name="payment_id")
     private List<Payment> payments;
     @Column(name="paid_date")
-    Date paidDate;
+    Instant paidDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private User user;
 
-    public void setOrderDate(Date orderDate){ this.orderDate=orderDate;}
-    public Date getOrderDate(){return this.orderDate;}
+    public void setOrderDate(Instant orderDate){ this.orderDate=orderDate;}
+    public Instant getOrderDate(){return this.orderDate;}
 
-    public void setoOrderTotal(BigDecimal orderTotal){ this.orderTotal=orderTotal;}
+    public void setOrderTotal(BigDecimal orderTotal){ this.orderTotal=orderTotal;}
     public BigDecimal getOrderTotal(){return this.orderTotal;}
 
-    public void setPaidDate(Date paidDate){ this.paidDate=paidDate;}
-    public Date getPaidDate(){return this.paidDate;}
+    public void setPaidDate(Instant paidDate){ this.paidDate=paidDate;}
+    public Instant getPaidDate(){return this.paidDate;}
+
+    public void setQuantity(Integer quantity){this.quantity=quantity;}
+    public Integer getQuantity(){return this.quantity;}
+
+    public List<Payment> getPayments(){return payments;}
+
+    public User getUser(){return this.user;}
+
+    public Long getId(){return this.id;}
+
+
 
 
 

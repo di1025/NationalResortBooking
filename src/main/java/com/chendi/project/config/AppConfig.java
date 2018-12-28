@@ -11,15 +11,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 //import org.springframework.context.annotation.FilterType;
 
 @Configuration
-@ComponentScan(basePackages = "com.chendi.project",
-excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="com.chendi.project.api.*"))
-public class AppConfig<logger> {
+@ComponentScan(basePackages = "com.chendi.project", excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="com.chendi.project.api.*"))
+public class AppConfig {
     @Autowired
     private Environment environment;
     private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Bean(name = "applicationProperties")
     public PropertiesFactoryBean getDbProperties() {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();

@@ -48,8 +48,8 @@ public class User {
     public void setPhone(String phone){ this.phone=phone;}
     public String getPhone(){return this.phone;}
 
+    public List<Order> getOrders() { return orders; }
 
+    public Long getID(){return this.id;}
 }
 
-//string1.equals(string2)
-//int1 == int2
