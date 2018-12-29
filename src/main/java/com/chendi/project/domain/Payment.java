@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Payment {
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "payments_id_seq")
-    @SequenceGenerator(name = "payments_id_seq", sequenceName = "payments_id_seq")
+    @SequenceGenerator(name = "payments_id_seq", sequenceName = "payments_id_seq",allocationSize = 1)
     private Long id;
     @Column(name = "card_number")
     Integer cardNumber;
@@ -48,7 +48,7 @@ public class Payment {
     public void setCardType(String cardType){ this.cardType=cardType;}
     public String getcardType(){return this.cardType;}
 
-    public void setHolderFirstName(String cardType){ this.holderFirstName=holderFirstName;}
+    public void setHolderFirstName(String holderFirstName){ this.holderFirstName=holderFirstName;}
     public String getHolderFirstName(){return this.holderFirstName;}
 
     public void setHolderLastName(String holderLastName){ this.holderLastName=holderLastName;}
@@ -75,7 +75,10 @@ public class Payment {
     public void setBillingPhoneNum(String billingPhoneNum){ this.billingPhoneNum=billingPhoneNum;}
     public String getBillingPhoneNum(){return this.billingPhoneNum;}
 
+    public void setOrder(Order order){this.order = order;}
     public Long getOrderId(){return order.getId();}
+    public Order getOrder(){return order;}
+
 
     public Long getId(){return this.id;}
 
