@@ -36,7 +36,6 @@ public class OrderRepositoryTest {
     @Transactional
     public void findByIdTest() {
         Order o = new Order();
-
         Instant paidDate = Instant.now();
         o.setPaidDate(paidDate);
         o.setOrderDate(Instant.now());
