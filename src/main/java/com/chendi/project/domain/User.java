@@ -17,15 +17,15 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name="users")
 public class User {
     @Column(name="first_name")
-    String firstName;
+    private String firstName;
     @Column(name="last_name")
-    String lastName;
+    private String lastName;
     @Column
-    String username;
+    private String username;
     @Column
-    String email;
+    private String email;
     @Column
-    String phone;
+    private String phone;
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_id_seq")
     @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq")

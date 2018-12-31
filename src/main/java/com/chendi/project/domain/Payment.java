@@ -17,27 +17,27 @@ public class Payment {
     @SequenceGenerator(name = "payments_id_seq", sequenceName = "payments_id_seq",allocationSize = 1)
     private Long id;
     @Column(name = "card_number")
-    Integer cardNumber;
+    private Integer cardNumber;
     @Column(name = "card_type")
-    String cardType;
+    private String cardType;
     @Column(name = "holder_first_name")
-    String holderFirstName;
+    private String holderFirstName;
     @Column(name = "holder_last_name")
-    String holderLastName;
+    private String holderLastName;
     @Column(name = "billing_address1")
-    String billingAddress1;
+    private String billingAddress1;
     @Column(name = "billing_address2")
-    String billingAddress2;
+    private String billingAddress2;
     @Column(name="billing_zip_code")
-    Integer billingZipCode;
+    private Integer billingZipCode;
     @Column(name = "billing_city")
-    String billingCity;
+    private String billingCity;
     @Column(name = "billing_state")
-    String billingState;
+    private String billingState;
     @Column(name = "billing_country")
-    String billingCountry;
+    private String billingCountry;
     @Column(name="billing_phone_number")
-    String billingPhoneNum;
+    private String billingPhoneNum;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
