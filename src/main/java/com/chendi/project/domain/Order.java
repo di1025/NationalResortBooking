@@ -18,16 +18,16 @@ public class Order {
     @SequenceGenerator(name="orders_id_seq",sequenceName="orders_id_seq",allocationSize=1)
     private Long id;
     @Column(name="order_date")
-    Instant orderDate;
+    private Instant orderDate;
     @Column
-    Integer quantity;
+    private Integer quantity;
     @Column(name="order_total")
-    BigDecimal orderTotal;
+    private BigDecimal orderTotal;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
 //    @Column(name="payment_id")
     private List<Payment> payments;
     @Column(name="paid_date")
-    Instant paidDate;
+    private Instant paidDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private User user;
