@@ -16,6 +16,4 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
     @Query("select u from User u where u.phone =?1")
     List<User> findByPhoneNumber(String phone);
-
-    List<User> fndAll();
 }

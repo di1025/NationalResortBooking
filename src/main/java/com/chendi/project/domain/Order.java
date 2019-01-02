@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
-
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
