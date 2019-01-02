@@ -1,5 +1,6 @@
 package com.chendi.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
@@ -28,9 +29,11 @@ public class User {
     private String phone;
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_id_seq")
-    @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq")
+    @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq",allocationSize = 1)
     private Long id;
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Order> orders;
 
     public void setUsername(String username){ this.username=username; }
