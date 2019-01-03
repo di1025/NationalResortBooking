@@ -13,6 +13,7 @@
         <hibernate.version>5.3.1.Final</hibernate.version>
         <flyway.version>5.2.1</flyway.version>
         <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
+        <swagger.version>2.9.2</swagger.version>
 
     </properties>
     <dependencies>
@@ -138,6 +139,22 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-java8</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+        <!--API document-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

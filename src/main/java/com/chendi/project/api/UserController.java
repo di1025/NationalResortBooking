@@ -8,20 +8,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @ResponseBody
-@RequestMapping(value={"/api/users","/api/user"}) // url specification
+@RequestMapping(value={"/api/user"}) // url specification
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET)//http method
+    @RequestMapping(value = "/userslist", method = RequestMethod.GET)//http method
     public List<User> getUserList() {
         logger.debug("list users");
         return userService.findAll();
@@ -36,6 +36,12 @@ public class UserController {
     @RequestMapping(method=RequestMethod.POST)
     public User generateUser(@RequestBody User user) {
         return userService.save(user);
+    }
+
+    @RequestMapping(method=RequestMethod.GET,params={"lastName"})
+    public List<User> getUserByLN(@RequestParam(value="lastName") String lastName ){
+        logger.debug("parameter last name is: "+lastName);
+        return userService.findByLastName(lastName);
     }
 
 }
