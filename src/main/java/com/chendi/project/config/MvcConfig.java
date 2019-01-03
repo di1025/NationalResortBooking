@@ -4,13 +4,11 @@ import com.chendi.project.config.viewerresolver.JsonViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,14 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.chendi.project.api")
+@Import({SwaggerConfig.class})
 public class MvcConfig implements WebMvcConfigurer {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer){
         configurer.defaultContentType(MediaType.APPLICATION_JSON);
@@ -32,7 +37,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public ViewResolver contentNeogotiatingViewResolver(ContentNegotiationManager manager){
         ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
         resolver.setContentNegotiationManager(manager);
-
         List<ViewResolver> viewResolversImpl = new ArrayList<>();
         viewResolversImpl.add(new JsonViewResolver());
         resolver.setViewResolvers(viewResolversImpl);
