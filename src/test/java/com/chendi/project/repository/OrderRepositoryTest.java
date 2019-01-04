@@ -2,8 +2,14 @@ package com.chendi.project.repository;
 
 import com.chendi.project.config.AppConfig;
 import com.chendi.project.domain.Order;
+import com.chendi.project.domain.Payment;
+import com.chendi.project.domain.User;
+import com.sun.org.apache.bcel.internal.generic.FADD;
+import org.hibernate.type.TrueFalseType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.test.context.ActiveProfiles;
@@ -18,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @WebAppConfiguration
@@ -31,6 +38,9 @@ public class OrderRepositoryTest {
 //    List<Order> findByPurchasedDate(Instant orderDate);
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     @Transactional
@@ -57,6 +67,28 @@ public class OrderRepositoryTest {
         o.setQuantity(3);
         orderRepository.save(o);
         List<Order> testOrders = orderRepository.findByPurchasedDate(o.getOrderDate());
+        assertNotNull(testOrders);
+        assertEquals(o.getId(),testOrders.get(0).getId());
+    }
+
+    @Test
+    @Transactional
+    public void findByUserIdTest(){
+        User u = new User();
+        u.setEmail("testEmail@test.com");
+        u.setFirstName("TestFN");
+        u.setLastName("TestLN");
+        u.setUsername("TestUserName");
+        u.setPhone("88888888");
+        userRepository.save(u);
+        Order o = new Order();
+        o.setPaidDate(Instant.now());
+        o.setOrderDate(Instant.now());
+        o.setOrderTotal(new BigDecimal("100"));
+        o.setQuantity(3);
+        o.setUser(u);
+        orderRepository.save(o);
+        List<Order> testOrders = orderRepository.findByUserId(u.getId());
         assertNotNull(testOrders);
         assertEquals(o.getId(),testOrders.get(0).getId());
     }
