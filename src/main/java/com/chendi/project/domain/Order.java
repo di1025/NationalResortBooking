@@ -16,17 +16,23 @@ public class Order {
     @GeneratedValue(strategy =SEQUENCE,generator = "orders_id_seq")
     @SequenceGenerator(name="orders_id_seq",sequenceName="orders_id_seq",allocationSize=1)
     private Long id;
+
     @Column(name="order_date")
     private Instant orderDate;
+
     @Column
     private Integer quantity;
+
     @Column(name="order_total")
     private BigDecimal orderTotal;
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
 //    @Column(name="payment_id")
     private List<Payment> payments;
+
     @Column(name="paid_date")
     private Instant paidDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private User user;
@@ -45,13 +51,11 @@ public class Order {
 
     public List<Payment> getPayments(){return payments;}
 
-    public User getUser(){return this.user;}
+    public void setUser(User user){this.user = user;}
+    public User getUser(){return user;}
+    public Long getUserId(){return user.getId();}
 
     public Long getId(){return this.id;}
-
-
-
-
 
 }
 

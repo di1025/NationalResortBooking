@@ -33,7 +33,7 @@ public class UserController {
         return userService.findById(userId);
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value="/signup", method=RequestMethod.POST)
     public User generateUser(@RequestBody User user) {
         return userService.save(user);
     }
