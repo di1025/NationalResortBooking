@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Controller
 @ResponseBody
-@RequestMapping(value={"/api/user"}) // url specification
+@RequestMapping(value={"/api/users"}) // url specification
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
