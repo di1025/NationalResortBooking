@@ -1,31 +1,47 @@
 package com.chendi.project.api;
 
 
+import com.chendi.project.domain.Order;
 import com.chendi.project.domain.User;
 import com.chendi.project.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @ResponseBody
-@RequestMapping(value={"/api/order"})
+@RequestMapping(value={"/api/orders"})
 public class OrderController {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+//    private final Logger logger = LoggerFactory.getLogger(getClass());
+//
+//    @Autowired
+//    private OrderService orderService;
+//
+//
+//    @RequestMapping(value="/newOrder",method=RequestMethod.POST)
+//    public Order generateOrder(@RequestBody Order order){
+//        return orderService.save(order);
+////        return null;
+//    }
 
-    @Autowired
-    private OrderService orderService;
 
-    @RequestMapping( method = RequestMethod.GET)//http method
-    public List<User> getUserList() {
-        logger.debug("list users");
-        return null;
-    }
+//    @RequestMapping(value="/{Id}", method = RequestMethod.GET)//http method
+//    public Optional<Order> getOrderById(@PathVariable("Id") Long id){
+//        logger.debug("Order:"+ id);
+////        return orderService.findById(id);
+//        return null;
+//    }
+
+//    @RequestMapping(method = RequestMethod.GET,params={"orderDate"})
+//    public List<Order> getOrderByPurchasedDate(@RequestParam(value="orderDate") Instant orderDate){
+//        return orderService.findByPurchasedDate(orderDate);
+//    }
+
 }
