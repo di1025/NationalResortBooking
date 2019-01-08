@@ -52,7 +52,9 @@ public class Order {
     public List<Payment> getPayments(){return payments;}
 
     public void setUser(User user){this.user = user;}
+
     public User getUser(){return user;}
+
     public Long getUserId(){return user.getId();}
 
     public Long getId(){return this.id;}

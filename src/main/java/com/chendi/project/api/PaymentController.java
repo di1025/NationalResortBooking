@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +26,8 @@ public class PaymentController {
        // return paymentService.findById(id);
     }
 
-    @RequestMapping(value="/savePayment", method = RequestMethod.POST)
-    public Payment savePayment(@RequestBody Payment payment){
+    @RequestMapping(value="/order/{id}", method = RequestMethod.POST)
+    public Payment savePayment(@RequestBody Payment payment,@PathVariable("id") Long orderId){
       //  return paymentService.save(payment);
         return null;
     }
@@ -44,8 +43,5 @@ public class PaymentController {
         return null;
      //   return paymentService.findByFirstNameAndLastName(holderFirstName,holderLastName);
     }
-
-
-
 
 }

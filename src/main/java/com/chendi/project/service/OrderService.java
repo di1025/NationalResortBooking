@@ -26,8 +26,17 @@ public class OrderService {
     public List<Order> findByUserId(Long id){
         return orderRepository.findByUserId(id);
     }
+
     public Order save(Order order) {
+
         return orderRepository.save(order);
     }
+
+//    public Order update(Order order) {
+//        order.setPaidDate(Instant.now());
+//        return orderRepository.save(order);
+//    }
+
+
 
 }
