@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/userslist", method = RequestMethod.GET)//http method
+    @RequestMapping(method = RequestMethod.GET)//http method
     public List<User> getUserList() {
         logger.debug("list users");
         return userService.findAll();
@@ -43,5 +43,4 @@ public class UserController {
         logger.debug("parameter last name is: "+lastName);
         return userService.findByLastName(lastName);
     }
-
 }
