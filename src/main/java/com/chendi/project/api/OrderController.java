@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.chendi.project.service.UserService;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class OrderController {
 
     @RequestMapping(value="/user/{id}",method=RequestMethod.POST)
     public Order generateOrder(@RequestBody Order order,@PathVariable("id") Long userId){
+        logger.debug("Generate Order:"+ userId);
         order.setOrderDate(Instant.now());
         User owner = userService.findById(userId);
         order.setUser(owner);
@@ -36,7 +38,8 @@ public class OrderController {
     }
 
     @RequestMapping(value="/{Id}",method=RequestMethod.PATCH)
-    public Order updatePaidDate(@PathVariable Long orderId){
+    public Order updatePaidDate(@PathVariable("Id") Long orderId){
+        logger.debug("Order updatePaidDate:"+ orderId);
         Order order = orderService.findById(orderId).get();
         order.setPaidDate(Instant.now());
         return orderService.save(order);

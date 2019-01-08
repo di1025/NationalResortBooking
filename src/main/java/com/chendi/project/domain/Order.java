@@ -1,5 +1,6 @@
 package com.chendi.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Order {
     @Column(name="order_total")
     private BigDecimal orderTotal;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
 //    @Column(name="payment_id")
     private List<Payment> payments;
@@ -33,6 +35,7 @@ public class Order {
     @Column(name="paid_date")
     private Instant paidDate;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private User user;
