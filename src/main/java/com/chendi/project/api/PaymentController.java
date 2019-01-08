@@ -1,7 +1,9 @@
 package com.chendi.project.api;
 
 
+import com.chendi.project.domain.Order;
 import com.chendi.project.domain.Payment;
+import com.chendi.project.service.OrderService;
 import com.chendi.project.service.PaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,29 +21,31 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private OrderService orderService;
+
     @RequestMapping(value="/{Id}", method= RequestMethod.GET)
-    public Optional<Payment> getPaymentById(@PathVariable("Id") Long id){
-        logger.debug("Payment is:");
-        return null;
-       // return paymentService.findById(id);
+    public Payment getPaymentById(@PathVariable("Id") Long id){
+        logger.debug("Payment is:"+ id);
+        return paymentService.findById(id).get();
     }
 
-    @RequestMapping(value="/order/{id}", method = RequestMethod.POST)
-    public Payment savePayment(@RequestBody Payment payment,@PathVariable("id") Long orderId){
-      //  return paymentService.save(payment);
-        return null;
+    @RequestMapping(value="/order/{Id}", method = RequestMethod.POST)
+    public Payment savePayment(@RequestBody Payment payment,@PathVariable("Id") Long orderId){
+        logger.debug("Payment is: "+ payment+"Order Id is: "+orderId);
+        Order order = orderService.findById(orderId).get();
+        payment.setOrder(order);
+        return paymentService.save(payment);
+
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"orderId"})
     public List <Payment> getPaymentByOrderId(@RequestParam(value="orderId") Long id){
-        return null;
-     //   return paymentService.findByOrderId(id);
+        return paymentService.findByOrderId(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, params={"holderFirstName","holderLastName"})
     public List <Payment> getPaymentByFirstNameAndLastName(@RequestParam(value="holderFirstName") String holderFirstName, @RequestParam(value = "holderLastName") String holderLastName){
-        return null;
-     //   return paymentService.findByFirstNameAndLastName(holderFirstName,holderLastName);
+        return paymentService.findByFirstNameAndLastName(holderFirstName,holderLastName);
     }
-
 }

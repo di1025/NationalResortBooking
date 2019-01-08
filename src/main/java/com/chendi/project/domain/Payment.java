@@ -1,5 +1,6 @@
 package com.chendi.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.omg.CORBA.INTERNAL;
 
 import javax.persistence.*;
@@ -38,6 +39,8 @@ public class Payment {
     private String billingCountry;
     @Column(name="billing_phone_number")
     private String billingPhoneNum;
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
