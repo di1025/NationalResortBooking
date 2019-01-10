@@ -9,10 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import com.chendi.project.service.UserService;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
     @Autowired
     private UserService userService;
 
@@ -41,16 +43,15 @@ public class OrderController {
     public Order updatePaidDate(@PathVariable("Id") Long orderId){
         logger.debug("Order updatePaidDate:"+ orderId);
         Order order = orderService.findById(orderId).get();
+   //     Instant instant=LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
         order.setPaidDate(Instant.now());
         return orderService.save(order);
     }
 
-
-    @RequestMapping(value="/{Id}", method = RequestMethod.GET)//http method
+    @RequestMapping(value="/{Id}", method = RequestMethod.GET)
     public Order getOrderById(@PathVariable("Id") Long id){
         logger.debug("Order:"+ id);
         return orderService.findById(id).get();
     }
-
 
 }

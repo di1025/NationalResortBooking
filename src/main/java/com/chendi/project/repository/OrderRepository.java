@@ -16,6 +16,6 @@ public interface OrderRepository extends CrudRepository<Order,Long> {
     @Query("select o from Order o where o.orderDate =?1")
     List<Order> findByPurchasedDate(Instant orderDate);
 
-    @Query("select o from Order o join fetch o.user where o.user.id=?1")
-    List<Order> findByUserId(Long id);
+//    @Query("select o from Order o join fetch o.user where o.user.id=?1")
+    List<Order> findByUser_Id(Long id);
 }

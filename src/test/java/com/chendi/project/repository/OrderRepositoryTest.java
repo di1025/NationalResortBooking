@@ -87,7 +87,7 @@ public class OrderRepositoryTest {
         o.setQuantity(3);
         o.setUser(u);
         orderRepository.save(o);
-        List<Order> testOrders = orderRepository.findByUserId(u.getId());
+        List<Order> testOrders = orderRepository.findByUser_Id(u.getId());
         assertNotNull(testOrders);
         assertEquals(o.getId(),testOrders.get(0).getId());
     }

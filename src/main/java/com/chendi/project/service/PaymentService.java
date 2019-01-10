@@ -22,7 +22,7 @@ public class PaymentService {
     }
 
     public List <Payment> findByFirstNameAndLastName(String holderFirstName, String holderLastName){
-        return paymentRepository.findByFirstNameAndLastName( holderFirstName,  holderLastName);
+        return paymentRepository.findByFirstNameAndLastName(holderFirstName, holderLastName);
     }
 
     public Payment save(Payment payment){
