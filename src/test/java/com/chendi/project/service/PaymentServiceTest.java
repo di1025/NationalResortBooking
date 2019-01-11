@@ -1,4 +1,5 @@
-package com.chendi.project.repository;
+package com.chendi.project.service;
+
 
 import com.chendi.project.config.AppConfig;
 import com.chendi.project.domain.Order;
@@ -7,7 +8,6 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,14 +23,15 @@ import static org.junit.Assert.assertEquals;
 
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
-@ActiveProfiles("unit")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class PaymentRepositoryTest {
+@ActiveProfiles("unit")
+public class PaymentServiceTest {
 
     @Autowired
-    private PaymentRepository paymentRepository;
+    private PaymentService paymentService;
+
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @Test
     @Transactional
@@ -40,7 +41,7 @@ public class PaymentRepositoryTest {
         o.setOrderDate(Instant.now());
         o.setOrderTotal(new BigDecimal("100"));
         o.setQuantity(3);
-        orderRepository.save(o);
+        orderService.save(o);
 
         Payment p1 = new Payment();
         p1.setBillingAddress1("testBillingAddress1");
@@ -55,7 +56,7 @@ public class PaymentRepositoryTest {
         p1.setHolderFirstName("testFN");
         p1.setHolderLastName("testLN");
         p1.setOrder(o);
-        paymentRepository.save(p1);
+        paymentService.save(p1);
 
         Payment p2 = new Payment();
         p2.setBillingAddress1("testBillingAddress1111");
@@ -70,23 +71,24 @@ public class PaymentRepositoryTest {
         p2.setHolderFirstName("testFN");
         p2.setHolderLastName("testLN");
         p2.setOrder(o);
-        paymentRepository.save(p2);
-        List<Payment> testPayments = paymentRepository.findByOrderId(p1.getOrderId());
+        paymentService.save(p2);
+        List<Payment> testPayments = paymentService.findByOrderId(p1.getOrderId());
         assertNotNull(testPayments);
 //        assertEquals(p1.getId(),testPayments.get(0).getId());
-        TestCase.assertEquals(testPayments.size(),2);
+        TestCase.assertEquals(testPayments.size(), 2);
 
 
     }
+
     @Test
     @Transactional
-    public void findByFirstNameAndLastNameTest(){
+    public void findByFirstNameAndLastNameTest() {
         Order o = new Order();
         o.setPaidDate(Instant.now());
         o.setOrderDate(Instant.now());
         o.setOrderTotal(new BigDecimal("100"));
         o.setQuantity(3);
-        orderRepository.save(o);
+        orderService.save(o);
 
         Payment p = new Payment();
         p.setBillingAddress1("testBillingAddress1");
@@ -101,10 +103,12 @@ public class PaymentRepositoryTest {
         p.setHolderFirstName("testFN");
         p.setHolderLastName("testLN");
         p.setOrder(o);
-        paymentRepository.save(p);
+        paymentService.save(p);
 
-        List<Payment> testPayments = paymentRepository.findByFirstNameAndLastName(p.getHolderFirstName(),p.getHolderLastName());
+        List<Payment> testPayments = paymentService.findByFirstNameAndLastName(p.getHolderFirstName(), p.getHolderLastName());
         assertNotNull(testPayments);
-        assertEquals(p.getId(),testPayments.get(0).getId());
+        assertEquals(p.getId(), testPayments.get(0).getId());
     }
+
+
 }
