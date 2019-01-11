@@ -17,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -40,9 +41,9 @@ public class UserRepositoryTest {
         u.setUsername("TestUserName");
         u.setPhone("88888888");
         userRepository.save(u);
-        List<User> testUsers = userRepository.findByPhoneNumber(u.getPhone());
+        Optional<User> testUsers = userRepository.findByPhoneNumber(u.getPhone());
         assertNotNull(testUsers);
-        assertEquals(u.getId(),testUsers.get(0).getId());
+        assertEquals(u.getId(),testUsers.get().getId());
 
     }
     @Test

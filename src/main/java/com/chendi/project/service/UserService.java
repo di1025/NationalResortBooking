@@ -15,7 +15,6 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> findAll(){
-//        List<User> users = Lists.newArrayList(userRepository.findAll());
         return userRepository.findAll();
     }
 
@@ -30,5 +29,9 @@ public class UserService {
 
     public List<User> findByLastName(String lastName) {
         return userRepository.findByLastName(lastName);
+    }
+
+    public User findByPhoneNumber(String phone){
+        return  userRepository.findByPhoneNumber(phone).get();
     }
 }

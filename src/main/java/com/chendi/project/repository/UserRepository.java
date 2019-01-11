@@ -19,6 +19,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
     List<User> findByLastnameOrFirstname(String holderFristName, String holderLastName);
 
     @Query("select u from User u where u.phone =?1")
-    List<User> findByPhoneNumber(String phone);
+    Optional <User> findByPhoneNumber(String phone);
 
 }
