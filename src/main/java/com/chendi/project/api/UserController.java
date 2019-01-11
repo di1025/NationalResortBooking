@@ -43,4 +43,11 @@ public class UserController {
         logger.debug("parameter last name is: "+lastName);
         return userService.findByLastName(lastName);
     }
+
+    @RequestMapping(method=RequestMethod.GET,params = {"phoneNumber"})
+    public User getUserByPhoneNumber(@RequestParam(value="phoneNumber") String phone){
+        logger.debug("parameter phone number is "+phone);
+        return userService.findByPhoneNumber(phone);
+
+    }
 }
