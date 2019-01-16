@@ -2,6 +2,7 @@ package com.chendi.project.service;
 
 import com.chendi.project.domain.User;
 import com.chendi.project.repository.UserRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +15,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    public User findById(Long id){
+    public User findById(Long id) {
         return userRepository.findById(id).get();
     }
-
 
     public User save(User user) {
         return userRepository.save(user);
@@ -31,7 +31,15 @@ public class UserService {
         return userRepository.findByLastName(lastName);
     }
 
-    public User findByPhoneNumber(String phone){
-        return  userRepository.findByPhoneNumber(phone).get();
+    public User findByPhoneNumber(String phone) {
+        return userRepository.findByPhoneNumber(phone).get();
+    }
+
+    public User findByEmailOrUsername(String keyword) throws NotFoundException {
+        User user = userRepository.findByEmailIgnoreCase(keyword);
+        if (user == null) {
+            user = userRepository.findByUsernameIgnoreCase(keyword);
+        }
+        return user;
     }
 }

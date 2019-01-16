@@ -2,6 +2,7 @@ package com.chendi.project.service;
 
 import com.chendi.project.config.AppConfig;
 import com.chendi.project.domain.User;
+import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,19 @@ public class UserServiceTest {
         User testUsers = userService.findByPhoneNumber(u.getPhone());
         assertNotNull(testUsers);
         assertEquals(u.getId(),testUsers.getId());
-
+    }
+    @Test
+    @Transactional
+    public void findByEmailOrUsernameTest()throws NotFoundException {
+        User u = new User();
+        u.setEmail("testEmail@test.com");
+        u.setFirstName("TestFN");
+        u.setLastName("TestLN");
+        u.setUsername("TestUserName");
+        u.setPassword("TestPassword");
+        u.setPhone("88888888");
+        userService.save(u);
+        User testUsers = userService.findByEmailOrUsername(u.getEmail());
+        assertEquals(u.getId(),testUsers.getId());
     }
 }

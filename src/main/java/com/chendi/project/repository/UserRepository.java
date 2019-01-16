@@ -21,4 +21,8 @@ public interface UserRepository extends CrudRepository<User,Long> {
     @Query("select u from User u where u.phone =?1")
     Optional <User> findByPhoneNumber(String phone);
 
+    User findByEmailIgnoreCase(String email);
+
+    User findByUsernameIgnoreCase(String username);
+
 }

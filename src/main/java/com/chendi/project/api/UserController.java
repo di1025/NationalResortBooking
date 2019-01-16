@@ -64,8 +64,5 @@ public class UserController {
     public void userLogin(@RequestParam(value="username") String username, String password){
 //        User user = new User();
         logger.debug("user info is: "+username + password);
-
     }
-
-
 }
