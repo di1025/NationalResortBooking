@@ -4,6 +4,7 @@ package com.chendi.project.service;
 import com.chendi.project.config.AppConfig;
 import com.chendi.project.domain.Order;
 import com.chendi.project.domain.User;
+import com.chendi.project.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class OrderServiceTest {
 
     @Autowired
     private UserService userService;
+
+
+    @Autowired
+    private UserRepository userRepository;
+
 
     @Test
     @Transactional
@@ -68,7 +74,7 @@ public class OrderServiceTest {
         u.setLastName("TestLN");
         u.setUsername("TestUserName");
         u.setPhone("88888888");
-        userService.save(u);
+        userRepository.save(u);
         Order o = new Order();
         o.setPaidDate(Instant.now());
         o.setOrderDate(Instant.now());

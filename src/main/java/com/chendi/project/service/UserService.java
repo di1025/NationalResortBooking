@@ -4,7 +4,9 @@ import com.chendi.project.domain.User;
 import com.chendi.project.repository.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +25,6 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public User save(User user) {
-        return userRepository.save(user);
-    }
 
     public List<User> findByLastName(String lastName) {
         return userRepository.findByLastName(lastName);
@@ -34,12 +33,21 @@ public class UserService {
     public User findByPhoneNumber(String phone) {
         return userRepository.findByPhoneNumber(phone).get();
     }
-
+    @Transactional
     public User findByEmailOrUsername(String keyword) throws NotFoundException {
         User user = userRepository.findByEmailIgnoreCase(keyword);
         if (user == null) {
             user = userRepository.findByUsernameIgnoreCase(keyword);
         }
         return user;
+    }
+
+    private BCryptPasswordEncoder encoder =new BCryptPasswordEncoder();
+
+    @Transactional
+    public User createNewUser(User newUser) {
+        String encodedPass = encoder.encode(newUser.getPassword());
+        newUser.setPassword(encodedPass);
+        return userRepository.save(newUser);
     }
 }

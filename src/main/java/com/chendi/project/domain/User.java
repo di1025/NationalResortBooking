@@ -40,6 +40,7 @@ public class User implements UserDetails {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
+
     private List<Order> orders;
 
     public void setUsername(String username){ this.username=username; }

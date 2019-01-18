@@ -6,7 +6,14 @@ import com.chendi.project.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -22,6 +29,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+//    @Qualifier(BeanIds.AUTHENTICATION_MANAGER)
+    private AuthenticationManager authenticationManager;
+
     @RequestMapping(method = RequestMethod.GET)//http method
     public List<User> getUserList() {
         logger.debug("list users");
@@ -34,9 +45,9 @@ public class UserController {
         return userService.findById(userId);
     }
 
-    @RequestMapping(value="/signup", method=RequestMethod.POST)
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
 //    @ResponseStatus(HttpStatus.OK)
-    public User generateUser( @RequestBody User user)
+    public User generateUser(@RequestBody User user)
 // @RequestParam("s_username") String username,@RequestParam("s_email") String email,
 //                             @RequestParam("s_password") String password,
 //                             @RequestParam("s_firstname", required= false) String firstname,
@@ -45,24 +56,30 @@ public class UserController {
 //        User newUser = new User();
 //        newUser.setUsername(username);
 //        newUser.setEmail(email);
-        return userService.save(user);
+        return userService.createNewUser(user);
     }
 
-    @RequestMapping(method=RequestMethod.GET,params={"lastName"})
-    public List<User> getUserByLN(@RequestParam(value="lastName") String lastName ){
-        logger.debug("parameter last name is: "+lastName);
+    @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
+    public List<User> getUserByLN(@RequestParam(value = "lastName") String lastName) {
+        logger.debug("parameter last name is: " + lastName);
         return userService.findByLastName(lastName);
     }
 
-    @RequestMapping(method=RequestMethod.GET,params = {"phoneNumber"})
-    public User getUserByPhoneNumber(@RequestParam(value="phoneNumber") String phone){
-        logger.debug("parameter phone number is "+phone);
+    @RequestMapping(method = RequestMethod.GET, params = {"phoneNumber"})
+    public User getUserByPhoneNumber(@RequestParam(value = "phoneNumber") String phone) {
+        logger.debug("parameter phone number is " + phone);
         return userService.findByPhoneNumber(phone);
     }
 
-    @RequestMapping(value="/login",method = RequestMethod.POST,params = {"username","password"})
-    public void userLogin(@RequestParam(value="username") String username, String password){
-//        User user = new User();
-        logger.debug("user info is: "+username + password);
+    @RequestMapping(value = "/login", method = RequestMethod.POST, params = {"username", "password"})
+    public void userLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+        try {
+            Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(username, password);//用usernamepasswordAuthenticationToken这个class 来创造一个新的instance
+
+            final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
+
+        } catch (AuthenticationException ex) {
+            logger.debug("the reason");
+        }
     }
 }
