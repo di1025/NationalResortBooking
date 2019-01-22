@@ -36,9 +36,15 @@ public class UserService {
 
     @Transactional
     public User findByEmailOrUsername(String keyword) throws NotFoundException {
+        if (keyword == null || "".equals(keyword.trim())){
+            throw new NullPointerException("search keyword is null");
+        }
         User user = userRepository.findByEmailIgnoreCase(keyword);
         if (user == null) {
             user = userRepository.findByUsernameIgnoreCase(keyword);
+        }
+        if (user==null){
+            throw new NotFoundException("The user is not exist");
         }
         return user;
     }
