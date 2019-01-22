@@ -33,6 +33,7 @@ public class UserService {
     public User findByPhoneNumber(String phone) {
         return userRepository.findByPhoneNumber(phone).get();
     }
+
     @Transactional
     public User findByEmailOrUsername(String keyword) throws NotFoundException {
         User user = userRepository.findByEmailIgnoreCase(keyword);

@@ -1,19 +1,24 @@
 package com.chendi.project.api;
 
 import com.chendi.project.domain.User;
+import com.chendi.project.extend.security.JwtTokenUtil;
 import com.chendi.project.repository.UserRepository;
 import com.chendi.project.service.UserService;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -33,6 +38,9 @@ public class UserController {
 //    @Qualifier(BeanIds.AUTHENTICATION_MANAGER)
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     @RequestMapping(method = RequestMethod.GET)//http method
     public List<User> getUserList() {
         logger.debug("list users");
@@ -45,18 +53,21 @@ public class UserController {
         return userService.findById(userId);
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-//    @ResponseStatus(HttpStatus.OK)
-    public User generateUser(@RequestBody User user)
-// @RequestParam("s_username") String username,@RequestParam("s_email") String email,
-//                             @RequestParam("s_password") String password,
-//                             @RequestParam("s_firstname", required= false) String firstname,
-//                             @RequestParam("s_lastname", required = false) String lastname)
-    {
-//        User newUser = new User();
-//        newUser.setUsername(username);
-//        newUser.setEmail(email);
-        return userService.createNewUser(user);
+    @RequestMapping(value = "/signup", method = RequestMethod.POST,params = {"username","email", "password","firstname","lastname","phone"})
+    public User generateUser(@RequestParam("username") String username,
+                             @RequestParam("email") String email,
+                             @RequestParam("password") String password,
+                             @RequestParam("firstname") String firstname,
+                             @RequestParam("lastname") String lastname,
+                             @RequestParam("phone") String phone) {
+        User newUser = new User();
+        newUser.setUsername(username);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+        newUser.setFirstName(firstname);
+        newUser.setLastName(lastname);
+        newUser.setPhone(phone);
+        return userService.createNewUser(newUser);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
@@ -72,14 +83,24 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, params = {"username", "password"})
-    public void userLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+    public String userLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device) {
         try {
             Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(username, password);//用usernamepasswordAuthenticationToken这个class 来创造一个新的instance
 
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
-
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            try {
+                final UserDetails userDetails = userService.findByEmailOrUsername(username);
+                final String token = jwtTokenUtil.generateToken(userDetails, device);
+                return token;
+//                return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+            } catch (NotFoundException e) {
+//                logger.error("",e);
+//                return ResponseEntity.notFound().build();
+            }
         } catch (AuthenticationException ex) {
             logger.debug("the reason");
         }
+        return null;
     }
 }
