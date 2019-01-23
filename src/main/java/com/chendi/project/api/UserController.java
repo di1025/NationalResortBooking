@@ -86,8 +86,8 @@ public class UserController {
     public String userLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device) {
         try {
             Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(username, password);//用usernamepasswordAuthenticationToken这个class 来创造一个新的instance
-
-            final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
+//authentication shiyige interface, yong UsernamePasswordAuthenticationToken lai zuo yi ge instance
+            final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);//diao yong zhengge xilie liu cheng, kan zhe ge neng bu neng
             SecurityContextHolder.getContext().setAuthentication(authentication);
             try {
                 final UserDetails userDetails = userService.findByEmailOrUsername(username);

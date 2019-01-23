@@ -35,7 +35,7 @@ public class UserService {
     }
 
     @Transactional
-    public User findByEmailOrUsername(String keyword) throws NotFoundException {
+    public User findByEmailOrUsername(String keyword) throws NotFoundException,NullPointerException {
         if (keyword == null || "".equals(keyword.trim())){
             throw new NullPointerException("search keyword is null");
         }

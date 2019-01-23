@@ -10,6 +10,7 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.sound.midi.Sequence;
 import javax.sql.DataSource;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
@@ -32,6 +33,8 @@ public class User implements UserDetails {
     private String phone;
     @Column
     private String password;
+//    @Column
+//    private Instant lastResetAt;
 
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "users_id_seq")
@@ -62,6 +65,10 @@ public class User implements UserDetails {
     public String getPassword(){return this.password;}
 
     public List<Order> getOrders() { return orders; }
+
+//    public void setLastResetAt(Instant lastResetAt) { this.lastResetAt = lastResetAt; }
+//    public Instant getLastResetAt() { return lastResetAt; }
+
 
     public Long getId(){return this.id;}
     @Override

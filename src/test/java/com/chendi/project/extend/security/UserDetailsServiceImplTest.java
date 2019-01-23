@@ -44,7 +44,6 @@ public class UserDetailsServiceImplTest {
         u.setPhone("88888888");
         userRepository.save(u);
         UserDetails userDetails = userDetailsService.loadUserByUsername("testEmail@test.com");
-//        User actual=userService.findById()
         assertEquals(userDetails.getUsername(),"TestUserName");
     }
 }
