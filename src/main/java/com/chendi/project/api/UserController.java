@@ -1,6 +1,7 @@
 package com.chendi.project.api;
 
 import com.chendi.project.domain.User;
+import com.chendi.project.extend.security.JwtAuthenticationResponse;
 import com.chendi.project.extend.security.JwtTokenUtil;
 import com.chendi.project.repository.UserRepository;
 import com.chendi.project.service.UserService;
@@ -52,8 +53,7 @@ public class UserController {
         logger.debug("list users by id:" + userId);
         return userService.findById(userId);
     }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.POST,params = {"username","email", "password","firstname","lastname","phone"})
+    @RequestMapping(value="/signup", method = RequestMethod.POST)
     public User generateUser(@RequestParam("username") String username,
                              @RequestParam("email") String email,
                              @RequestParam("password") String password,
@@ -70,6 +70,8 @@ public class UserController {
         return userService.createNewUser(newUser);
     }
 
+
+
     @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
     public List<User> getUserByLN(@RequestParam(value = "lastName") String lastName) {
         logger.debug("parameter last name is: " + lastName);
@@ -82,18 +84,21 @@ public class UserController {
         return userService.findByPhoneNumber(phone);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, params = {"username", "password"})
-    public String userLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<?> userLogin(@RequestBody User userLogin, Device device) {
         try {
-            Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(username, password);//用usernamepasswordAuthenticationToken这个class 来创造一个新的instance
+            Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(
+                    userLogin.getUsername(),
+                    userLogin.getPassword());//用usernamepasswordAuthenticationToken这个class 来创造一个新的instance
 //authentication shiyige interface, yong UsernamePasswordAuthenticationToken lai zuo yi ge instance
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);//diao yong zhengge xilie liu cheng, kan zhe ge neng bu neng
+//            yong authenticationManager.authenticate() this method to authenticate it: find userDetails and encoder, compare the username and password
             SecurityContextHolder.getContext().setAuthentication(authentication);
+//
             try {
-                final UserDetails userDetails = userService.findByEmailOrUsername(username);
+                final UserDetails userDetails = userService.findByEmailOrUsername(userLogin.getUsername());
                 final String token = jwtTokenUtil.generateToken(userDetails, device);
-                return token;
-//                return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+               return ResponseEntity.ok(new JwtAuthenticationResponse(token));
             } catch (NotFoundException e) {
 //                logger.error("",e);
 //                return ResponseEntity.notFound().build();

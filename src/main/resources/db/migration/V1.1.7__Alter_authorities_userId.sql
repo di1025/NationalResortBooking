@@ -1,0 +1,1 @@
+ALTER TABLE Authorities RENAME COLUMN user_id TO users_id;

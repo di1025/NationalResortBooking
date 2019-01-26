@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User,Long> {
     List<User> findAll();
 
+    Optional<User> findById(Long userId);
 
     List<User> findByLastName(String lastName);
 

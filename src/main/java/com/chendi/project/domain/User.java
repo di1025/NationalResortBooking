@@ -43,8 +43,12 @@ public class User implements UserDetails {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
-
     private List<Order> orders;
+
+    @Transient
+    @JsonIgnore
+    private Collection<? extends GrantedAuthority> authorities;
+
 
     public void setUsername(String username){ this.username=username; }
     public String getUsername(){ return this.username; }
@@ -79,11 +83,14 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired(){return true;}
     @Override
     public boolean isEnabled(){return true;}
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
+    }
+
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }
 
