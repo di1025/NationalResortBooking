@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.inMemoryAuthentication().withUser(“user”)
 //                .password(“{noop}password”).roles(“REGISTERED_USER”);
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        auth.userDetailsService(userDetailService).passwordEncoder(encoder);
+        auth.userDetailsService(userDetailService).passwordEncoder(encoder);// use loaduserbyusername;
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
@@ -57,7 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();}
 
     protected void configure(HttpSecurity http) throws Exception{
-        http.addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup","/api/users/signup").permitAll()
+//
+        http.csrf().disable().addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup","/api/users/signup").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER")
          //.authenticated()

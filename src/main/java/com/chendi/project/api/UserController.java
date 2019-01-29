@@ -1,6 +1,7 @@
 package com.chendi.project.api;
 
 import com.chendi.project.domain.User;
+import com.chendi.project.domain.UserLogin;
 import com.chendi.project.extend.security.JwtAuthenticationResponse;
 import com.chendi.project.extend.security.JwtTokenUtil;
 import com.chendi.project.repository.UserRepository;
@@ -84,8 +85,9 @@ public class UserController {
         return userService.findByPhoneNumber(phone);
     }
 
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> userLogin(@RequestBody User userLogin, Device device) {
+    public ResponseEntity<?> userLogin(@RequestBody UserLogin userLogin, Device device) {
         try {
             Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(
                     userLogin.getUsername(),
@@ -99,13 +101,13 @@ public class UserController {
                 final UserDetails userDetails = userService.findByEmailOrUsername(userLogin.getUsername());
                 final String token = jwtTokenUtil.generateToken(userDetails, device);
                return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+//    above equals to    JwtAuthenticationResponse jsontoken= new JwtAuthenticationResponse(token);
+//                return new ResponseEntity<>(HttpStatus.ok);
             } catch (NotFoundException e) {
-//                logger.error("",e);
-//                return ResponseEntity.notFound().build();
+                return ResponseEntity.notFound().build();
             }
         } catch (AuthenticationException ex) {
-            logger.debug("the reason");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed, please check your username and password");
         }
-        return null;
     }
 }

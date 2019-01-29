@@ -32,7 +32,6 @@ public class JwtTokenUtil {
 //    @Value("#{shareProperties['jwt.expiration]}")
     private Long expiration = 86400L;
 
-
     public Claims getClaimsFromToken(String token){
         Claims claims;
         try{

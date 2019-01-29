@@ -2,6 +2,7 @@ package com.chendi.project.service;
 
 import com.chendi.project.domain.Authority;
 import com.chendi.project.domain.User;
+import com.chendi.project.enumdef.AuthorityRole;
 import com.chendi.project.repository.AuthorityRepository;
 import com.chendi.project.repository.UserRepository;
 import javassist.NotFoundException;
@@ -22,6 +23,9 @@ public class UserService {
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    @Autowired
+    private AuthorityService  authorityService;
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -38,8 +42,6 @@ public class UserService {
         return userRepository.findByPhoneNumber(phone).get();
     }
 
-//    @Value("#{shareProperties['jwt.secret]}")
-    private String REGISTED_ROLE="REGISTED_ROLE";
 
 
     @Transactional
@@ -63,6 +65,9 @@ public class UserService {
         return authorityRepository.save(userAuthority);
     }
 
+    public List<Authority> findAuthorities(User user){
+        return authorityService.findAuthoritiesByUserId(user.getId());
+    }
 
     private BCryptPasswordEncoder encoder =new BCryptPasswordEncoder();
 
@@ -71,7 +76,7 @@ public class UserService {
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
         userRepository.save(newUser);
-        addAuthority(newUser,REGISTED_ROLE);
+        addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
         userRepository.save(newUser);
         return newUser;
     }
