@@ -25,12 +25,12 @@ public class JwtTokenUtil {
     private static final String AUDIENCE_TABLET ="tablet";
     private static final String AUDIENCE_MOBILE ="mobile";
 
-//    @Value("#{shareProperties['jwt.secret]}")
-    private String secret = "secret";
+    @Value("#{shareProperties['jwt.secret']}")
+    private String secret;
 
 
-//    @Value("#{shareProperties['jwt.expiration]}")
-    private Long expiration = 86400L;
+    @Value("#{shareProperties['jwt.expiration']}")
+    private Long expiration;
 
     public Claims getClaimsFromToken(String token){
         Claims claims;

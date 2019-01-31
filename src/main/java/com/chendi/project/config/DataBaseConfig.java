@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import javax.xml.ws.Action;
 import java.util.Properties;
 
 @Configuration
@@ -34,9 +33,10 @@ public class DataBaseConfig {
 //    protected String driverClassName="org.postgresql.ds.PGSimpleDataSource";
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private Environment environment;
-
+//
     @Value("#{ applicationProperties['database.serverName'] }")
     protected String databaseUrl;
 
@@ -48,8 +48,6 @@ public class DataBaseConfig {
 
     @Value("#{ applicationProperties['database.dataSourceClassName'] }")
     protected String driverClassName="";
-
-
 
     private BasicDataSource createDataSource() {
         BasicDataSource dataSource = new BasicDataSource();

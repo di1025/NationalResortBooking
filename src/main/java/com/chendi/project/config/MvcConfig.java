@@ -1,10 +1,12 @@
 package com.chendi.project.config;
 
 import com.chendi.project.config.viewerresolver.JsonViewResolver;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -12,6 +14,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +29,19 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
     @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer){
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.defaultContentType(MediaType.APPLICATION_JSON);
     }
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
     @Bean
-    public ViewResolver contentNeogotiatingViewResolver(ContentNegotiationManager manager){
+    public ViewResolver contentNeogotiatingViewResolver(ContentNegotiationManager manager) {
         ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
         resolver.setContentNegotiationManager(manager);
         List<ViewResolver> viewResolversImpl = new ArrayList<>();
@@ -44,20 +49,27 @@ public class MvcConfig implements WebMvcConfigurer {
         resolver.setViewResolvers(viewResolversImpl);
         return resolver;
     }
+
     @Bean
-    public ViewResolver jsonViewResolver(){
+    public ViewResolver jsonViewResolver() {
         return new JsonViewResolver();
     }
 
     @Bean
-    public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver(){
+    public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {
         return new DeviceHandlerMethodArgumentResolver();
     }
 
     @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(deviceHandlerMethodArgumentResolver());
     }
 
 
+
 }
+
+
+
+
+

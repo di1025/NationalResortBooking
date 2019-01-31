@@ -39,8 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (domainUser ==null){
 //            throw new BadCredentialsException("AbstractUserDetailsAuthenticationProvider.UsernameNotFound", new Object
         }
-        List<Authority> userAuthoriies = userService.findAuthorities(domainUser);
-        domainUser.setAuthorities(userAuthoriies);
+        List<Authority> userAuthories = userService.findAuthorities(domainUser);
+        domainUser.setAuthorities(userAuthories);
         return domainUser;
     }
 }

@@ -55,19 +55,7 @@ public class UserController {
         return userService.findById(userId);
     }
     @RequestMapping(value="/signup", method = RequestMethod.POST)
-    public User generateUser(@RequestParam("username") String username,
-                             @RequestParam("email") String email,
-                             @RequestParam("password") String password,
-                             @RequestParam("firstname") String firstname,
-                             @RequestParam("lastname") String lastname,
-                             @RequestParam("phone") String phone) {
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setEmail(email);
-        newUser.setPassword(password);
-        newUser.setFirstName(firstname);
-        newUser.setLastName(lastname);
-        newUser.setPhone(phone);
+    public User generateUser(@RequestBody User newUser){
         return userService.createNewUser(newUser);
     }
 

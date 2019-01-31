@@ -13,7 +13,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-//import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @ComponentScan(basePackages = "com.chendi.project", excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="com.chendi.project.api.*"))
@@ -29,6 +28,13 @@ public class AppConfig {
         logger.debug("applicationProperties is "+profile);
         bean.setLocation(new ClassPathResource("META-INF/env/application-"+profile+".properties"));
         return bean;
+    }
+
+    @Bean(name = "shareProperties")
+    public PropertiesFactoryBean getTKProperties() {
+        PropertiesFactoryBean shareProperties = new PropertiesFactoryBean();
+        shareProperties.setLocation(new ClassPathResource("META-INF/shared-runtime.properties"));
+        return shareProperties;
     }
 
 }
