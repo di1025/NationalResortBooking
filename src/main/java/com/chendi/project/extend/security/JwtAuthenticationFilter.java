@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -22,12 +23,12 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Value("#{shared-runtime['jwt.header']}")
+    @Value("#{shareProperties['jwt.header']}")
     private String tokenHeader;
 
     private String bear = "Bearer";
@@ -37,9 +38,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //TODO extract token from bearer
         //TODO get header and username info from token;
         //TODO authentication user based on info in step 2
-        String token = request.getHeader(this.tokenHeader);
+        String tokenHeader = request.getHeader(this.tokenHeader);//use tokenHeader(key) to return the token (value)
         if (tokenHeader != null && tokenHeader.startsWith(bear)) {
-            String authToken = token.substring(7);
+            String authToken = tokenHeader.substring(7);
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -56,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             } else {
                 logger.info("token doesn't container jwt bearer header");
             }
-            chain.doFilter(request, response);
         }
+        chain.doFilter(request, response);
     }
 }

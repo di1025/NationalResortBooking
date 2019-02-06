@@ -114,8 +114,6 @@ public class JwtTokenUtil {
     }
 
 
-
-
     private String generateToken(Map<String,Object> claims){//claims is payload; output is using Jwts uses payload to generate a token
         return Jwts.builder()
                 .setClaims(claims)

@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @ComponentScan(basePackages = "com.chendi.project", excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="com.chendi.project.api.*"))
@@ -33,7 +31,7 @@ public class AppConfig {
     @Bean(name = "shareProperties")
     public PropertiesFactoryBean getTKProperties() {
         PropertiesFactoryBean shareProperties = new PropertiesFactoryBean();
-        shareProperties.setLocation(new ClassPathResource("META-INF/shared-runtime.properties"));
+        shareProperties.setLocation(new ClassPathResource("META-INF/shareProperties.properties"));
         return shareProperties;
     }
 
