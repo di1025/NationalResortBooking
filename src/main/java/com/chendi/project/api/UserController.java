@@ -59,8 +59,6 @@ public class UserController {
         return userService.createNewUser(newUser);
     }
 
-
-
     @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
     public List<User> getUserByLN(@RequestParam(value = "lastName") String lastName) {
         logger.debug("parameter last name is: " + lastName);
@@ -70,9 +68,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, params = {"phoneNumber"})
     public User getUserByPhoneNumber(@RequestParam(value = "phoneNumber") String phone) {
         logger.debug("parameter phone number is " + phone);
-        return userService.findByPhoneNumber(phone);
-    }
-
+        return userService.findByPhoneNumber(phone); }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> userLogin(@RequestBody UserLogin userLogin, Device device) {
@@ -99,3 +95,5 @@ public class UserController {
         }
     }
 }
+
+//userDetail

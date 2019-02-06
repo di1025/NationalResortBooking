@@ -18,6 +18,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,11 +32,18 @@ public class JwtTokenUtilTest {
 
     @Transactional
     @Test
-    public void generateTokenTest(){
+    public void generateTokenTest() {
         User user = new User();
         Device device = new LiteDevice();
         user.setUsername("testusername3");
         user.setPassword("password3");
-        System.out.println(jwtTokenUtil.generateToken(user,device));
+        String generatedToken = jwtTokenUtil.generateToken(user, device);
+        String testUsername=jwtTokenUtil.getUsernameFromToken(generatedToken);
+        String[] data = generatedToken.split("\\.");// escape note
+        assertEquals(3, data.length);
+        assertEquals(user.getUsername(),testUsername);
+        for (String n : data) {
+            assertTrue(!"".equals(n.trim())&&n instanceof String);}
+
     }
 }
