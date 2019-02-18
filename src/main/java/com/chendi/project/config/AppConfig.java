@@ -1,6 +1,9 @@
 package com.chendi.project.config;
 
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.chendi.project.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +37,13 @@ public class AppConfig {
         shareProperties.setLocation(new ClassPathResource("META-INF/shareProperties.properties"));
         return shareProperties;
     }
+
+//    @Bean
+//    public StorageService getStorageService(){
+//        AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
+//        StorageService storageService = new StorageService(s3);
+//        storageService.setBucket("nationalparkreservation");
+//        return storageService;
+//    }
 
 }

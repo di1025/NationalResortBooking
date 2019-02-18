@@ -2,7 +2,6 @@ package com.chendi.project.extend.security;
 import com.chendi.project.domain.Authority;
 import com.chendi.project.domain.User;
 import com.chendi.project.service.UserService;
-import org.jcp.xml.dsig.internal.dom.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
