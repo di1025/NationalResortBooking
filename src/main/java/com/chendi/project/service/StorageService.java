@@ -14,7 +14,7 @@ public class StorageService {
     public AmazonS3 s3;
     public String bucket;
 
-    public StorageService(AmazonS3 s3){};
+    public StorageService(AmazonS3 s3){this.s3=s3;}
     public StorageService(){};
 
     public void uploadObject(String keyName, String filePath, String bucketName) {
@@ -29,7 +29,9 @@ public class StorageService {
     }
 
     public void putObject(String S3key,File file){
-        s3.putObject(bucket,S3key,file);
+        if(S3key !=null) {
+            s3.putObject(bucket, S3key, file);
+        }
     }
 
     public void putObject(String bucket,String S3key,File file){

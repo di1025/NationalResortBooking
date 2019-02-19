@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class MockConfig {
 
+
     @Mock
     private AmazonS3 client = Mockito.mock(AmazonS3.class);
 

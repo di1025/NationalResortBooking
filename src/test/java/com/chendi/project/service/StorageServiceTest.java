@@ -8,6 +8,8 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.chendi.project.config.AppConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
@@ -30,12 +32,12 @@ import java.util.List;
 public class StorageServiceTest {
 //    public AmazonS3 s3;
     public String keyName = "unittestfile";
-    public String testBucket;// test bukect name
 
+    public String testBucket="testBucket";// test bukect name
+
+//    @InjectMocks
     @Autowired
     private StorageService storageService;
-
-    private AmazonS3 client = Mockito.mock(AmazonS3.class);
 
 
 
@@ -53,11 +55,10 @@ public class StorageServiceTest {
 //    }
 
     @Test
-    @Transactional
     public void uploadObjectTest(){
         File file = new File("/Users/DiChen/Desktop/Interview Tech Examples.pdf.pdf");
-        storageService.putObject(testBucket,keyName,file);
-        verify(client,times(1));
+        storageService.putObject(keyName,file);
+        verify(storageService.s3,times(1)).putObject(testBucket,keyName,file);
 //        storageService.putObject(testBucket,null,file);
 //        verify(client,times(1));
     }
