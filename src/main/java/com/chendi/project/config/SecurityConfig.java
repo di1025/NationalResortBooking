@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
         http.csrf().disable()
                 .addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup","/api/users/signup").permitAll()
+            .authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup","/api/users/signup","/api/image").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER")
          //.authenticated()

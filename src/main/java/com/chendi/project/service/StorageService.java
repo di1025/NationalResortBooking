@@ -3,11 +3,10 @@ package com.chendi.project.service;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ListObjectsV2Result;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.*;
+
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 public class StorageService {
@@ -50,6 +49,34 @@ public class StorageService {
 
     public void setBucket(String bucket){
         this.bucket=bucket;
+    }
+
+    public ObjectListing listObject(String bucket){
+        if(bucket==null) return null;
+        else return s3.listObjects(bucket);
+    }
+
+    public ObjectListing listObject(){
+        if(bucket==null) return null;
+        else return s3.listObjects(bucket);
+    }
+
+
+    public void deleteObject(String bucket,String S3key){
+        if(bucket!=null&&S3key!=null)
+         s3.deleteObject(bucket,S3key);
+    }
+
+    public void deleteObject(String S3key){
+        if(bucket!=null&&S3key!=null)
+            s3.deleteObject(bucket,S3key);
+    }
+
+    public URL getUrl(String S3key) {
+        if(S3key==null)return null;
+        else
+            return s3.getUrl(bucket, S3key);
+
     }
 
 //    public static void main(String[] args) {

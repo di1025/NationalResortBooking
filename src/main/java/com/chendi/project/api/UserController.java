@@ -54,6 +54,7 @@ public class UserController {
         logger.debug("list users by id:" + userId);
         return userService.findById(userId);
     }
+
     @RequestMapping(value="/signup", method = RequestMethod.POST)
     public User generateUser(@RequestBody User newUser){
         return userService.createNewUser(newUser);
