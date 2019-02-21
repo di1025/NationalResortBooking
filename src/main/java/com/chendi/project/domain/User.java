@@ -47,6 +47,7 @@ public class User implements UserDetails {
 
     @Transient
     @JsonIgnore
+    //@OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
     private Collection<? extends GrantedAuthority> authorities;
 
 

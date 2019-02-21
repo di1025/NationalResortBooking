@@ -21,8 +21,6 @@ public class ImageController {
     public StorageService storageService;
 
 
-
-
     @RequestMapping(method = RequestMethod.POST,consumes={"multipart/form-data"})
     public Map<String,URL> uploadImage(@RequestParam(value="pic")MultipartFile multipartFile) throws IOException {
         String fileName=multipartFile.getOriginalFilename();

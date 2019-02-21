@@ -20,6 +20,7 @@ public class Authority implements Serializable, GrantedAuthority {
     private Long id;
 
     @NotNull
+    @Column
     private String authority;
 
     @NotNull
