@@ -22,6 +22,7 @@ public class StorageService {
         try {
             s3.putObject(bucketName, keyName, new File(filePath));
         } catch (AmazonServiceException e) {
+            //TODO replace with logger.
             System.err.println(e.getErrorMessage());
             System.exit(1);
         }

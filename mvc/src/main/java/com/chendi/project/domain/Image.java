@@ -18,12 +18,10 @@ public class Image {
     @SequenceGenerator(name="images_id_seq",sequenceName="images_id_seq",allocationSize=1)
     private Long id;
 
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private User user;
-
 
     @Column
     private URL url;
@@ -88,6 +86,5 @@ public class Image {
         this.bucket = bucket;
     }
 //url,s3key(uuid+extension),uuid,bucket,extension,userid
-
 
 }
