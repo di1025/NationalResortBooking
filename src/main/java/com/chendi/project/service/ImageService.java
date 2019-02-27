@@ -45,8 +45,6 @@ public class ImageService {
             image.setBucket(storageService.getBucket());//?? if need
             image.setExtension(extension);
             image.setS3Key(s3Key);
-            //uuid?
-
             return image;
         }
         catch(IOException e){ //compile exception(not runtime exception)

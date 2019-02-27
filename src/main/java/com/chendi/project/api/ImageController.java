@@ -1,5 +1,7 @@
 package com.chendi.project.api;
 
+import com.chendi.project.domain.Image;
+import com.chendi.project.service.ImageService;
 import com.chendi.project.service.StorageService;
 import org.hibernate.service.spi.ServiceException;
 import org.slf4j.Logger;
@@ -23,23 +25,24 @@ public class ImageController {
     @Autowired
     public StorageService storageService;
 
+    @Autowired
+    public ImageService imageService;
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(method = RequestMethod.POST,consumes={"multipart/form-data"})
-    public Map<String,URL> uploadImage(@RequestParam(value="pic")MultipartFile multipartFile)  {
+    public Map<String,String> uploadImage(@RequestParam(value="pic")MultipartFile multipartFile)  {
         if (multipartFile==null||multipartFile.isEmpty()) throw new ServiceException("File must not be null!");
         String fileName=multipartFile.getOriginalFilename();
         File convFile=new File(multipartFile.getOriginalFilename());
-        Map<String,URL> result=new HashMap<>();
+        Map<String,String> result=new HashMap<>();
         try{
-            multipartFile.transferTo(convFile);
-            storageService.putObject(fileName,convFile);
-            URL url=storageService.getUrl(fileName);
-            result.put("s3_url",url);
-//            result.put("s3_uuid",s3)
+            Image image = imageService.saveUUIDImage(multipartFile);
+            result.put("s3_url",image.getUrl().toString());
+            result.put("s3_uuid",image.getUuid());
             return result;
         }
-        catch(IOException e){ //compile exception(not runtime exception)
+        catch(ServiceException e){ //compile exception(not runtime exception)
             logger.error("Upload didn't succeed.",e);
         }
         return null;
