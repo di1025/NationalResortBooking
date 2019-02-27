@@ -45,6 +45,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Order> orders;
 
+    @OneToMany(fetch =FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Image> images;
+
     @Transient
     @JsonIgnore
     //@OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)

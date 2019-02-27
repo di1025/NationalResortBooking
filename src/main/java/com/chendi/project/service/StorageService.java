@@ -51,6 +51,8 @@ public class StorageService {
         this.bucket=bucket;
     }
 
+    public String getBucket(){return bucket;}
+
     public ObjectListing listObject(String bucket){
         if(bucket==null) return null;
         else return s3.listObjects(bucket);
@@ -78,6 +80,8 @@ public class StorageService {
             return s3.getUrl(bucket, S3key);
 
     }
+
+
 
 //    public static void main(String[] args) {
 ////        StorageService s = new StorageService();
