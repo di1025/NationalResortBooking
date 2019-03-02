@@ -32,9 +32,9 @@ public class ImageController {
 
     @RequestMapping(method = RequestMethod.POST,consumes={"multipart/form-data"})
     public Map<String,String> uploadImage(@RequestParam(value="pic")MultipartFile multipartFile)  {
-        if (multipartFile==null||multipartFile.isEmpty()) throw new ServiceException("File must not be null!");
-        String fileName=multipartFile.getOriginalFilename();
-        File convFile=new File(multipartFile.getOriginalFilename());
+//        if (multipartFile==null||multipartFile.isEmpty()) throw new ServiceException("File must not be null!");
+//        String fileName=multipartFile.getOriginalFilename();
+//        File convFile=new File(multipartFile.getOriginalFilename());
         Map<String,String> result=new HashMap<>();
         try{
             Image image = imageService.saveUUIDImage(multipartFile);

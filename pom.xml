@@ -8,5 +8,6 @@
 
     <modules>
         <module>mvc</module>
+        <module>worker</module>
     </modules>
 </project>

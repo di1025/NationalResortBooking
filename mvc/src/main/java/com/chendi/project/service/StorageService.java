@@ -4,6 +4,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.net.URL;
@@ -12,6 +13,7 @@ import java.util.List;
 public class StorageService {
     public AmazonS3 s3;
     public String bucket;
+    public Logger logger;
 
     public StorageService(AmazonS3 s3){this.s3=s3;}
     public StorageService(){};
@@ -22,8 +24,7 @@ public class StorageService {
         try {
             s3.putObject(bucketName, keyName, new File(filePath));
         } catch (AmazonServiceException e) {
-            //TODO replace with logger.
-            System.err.println(e.getErrorMessage());
+            logger.error("upload didn't succeed");
             System.exit(1);
         }
     }

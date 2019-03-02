@@ -10,6 +10,7 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.sound.midi.Sequence;
 import javax.sql.DataSource;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
@@ -22,15 +23,22 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name="users")
 public class User implements UserDetails {
     @Column(name="first_name")
+    @NotNull
     private String firstName;
+
     @Column(name="last_name")
+    @NotNull
     private String lastName;
+
     @Column
     private String username;
+
     @Column
     private String email;
+
     @Column
     private String phone;
+
     @Column
     private String password;
 //    @Column
@@ -41,7 +49,7 @@ public class User implements UserDetails {
     @SequenceGenerator(name="users_id_seq",sequenceName="users_id_seq",allocationSize = 1)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)//mappedBy the join columns in the ordertable
     @JsonIgnore
     private List<Order> orders;
 

@@ -42,10 +42,7 @@ public class ImageService {
             storageService.putObject(s3Key,localFile);
             URL url=storageService.getUrl(s3Key);
             image.setUrl(url);
-            //todo remove bucket
-            image.setBucket(storageService.getBucket());//?? if need
-            //todo remove extension
-            image.setExtension(extension);
+            image.setBucket(storageService.getBucket());
             image.setS3Key(s3Key);
             imageRepository.save(image);
             return image;

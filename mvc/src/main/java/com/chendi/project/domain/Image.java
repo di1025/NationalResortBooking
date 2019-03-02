@@ -26,8 +26,6 @@ public class Image {
     @Column
     private URL url;
 
-    @Column
-    private String extension;
 
     @Column(name="s3_key")
     private String s3Key;
@@ -58,13 +56,6 @@ public class Image {
         this.user = user;
     }
 
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
 
     public String getS3Key() {
         return s3Key;
