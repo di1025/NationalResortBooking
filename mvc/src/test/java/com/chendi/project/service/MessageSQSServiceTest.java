@@ -39,13 +39,13 @@ public class MessageSQSServiceTest {
 
     @Test
     public void sendMessageRequestTest(){
-        messageSQSService.sendMessageRequest("test1-message");
+        messageSQSService.sendMessageRequest("test1-message",5);
         SendMessageRequest sendMsgRequest = new SendMessageRequest()
                 .withQueueUrl(sqsUrl)
                 .withMessageBody("test1-message")
                 .withDelaySeconds(5);
         verify(sqs,times(1)).sendMessage(sendMsgRequest);
-        messageSQSService.sendMessageRequest(null);
+        messageSQSService.sendMessageRequest(null,5);
         verify(sqs,times(1)).sendMessage(sendMsgRequest);
     }
 

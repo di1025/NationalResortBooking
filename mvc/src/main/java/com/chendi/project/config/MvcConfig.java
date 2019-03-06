@@ -51,10 +51,10 @@ public class MvcConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-    @Bean
-    public ViewResolver jsonViewResolver() {
-        return new JsonViewResolver();
-    }
+//    @Bean
+//    public ViewResolver jsonViewResolver() {
+//        return new JsonViewResolver();
+//    }
 
     @Bean
     public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {

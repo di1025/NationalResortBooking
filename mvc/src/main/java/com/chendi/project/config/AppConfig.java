@@ -11,6 +11,7 @@ import com.chendi.project.service.jms.MessageSQSService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -46,6 +47,17 @@ public class AppConfig {
         return sqsAWSProperties;
     }
 
+    @Bean(name = "s3AWSProperties")
+    public PropertiesFactoryBean getS3Properties(){
+        PropertiesFactoryBean s3AWSProperties = new PropertiesFactoryBean();
+        s3AWSProperties.setLocation(new ClassPathResource("META-INF/env/s3AWSProperties.properties"));
+        return s3AWSProperties;
+    }
+
+//    @Value("#{s3AWSProperties['s3.bucketName']}")
+//    String bucketName;
+
+
     @Bean
     @Profile({"dev","test","stage","prod"})
     public StorageService getStorageService(){
@@ -57,13 +69,13 @@ public class AppConfig {
 
 
 //    @Bean
-////    @Profile({"dev"})
-////    public MessageSQSService getMessageSQSService(){
-////        AmazonSQS sqs= AmazonSQSClientBuilder.defaultClient();
-////        MessageSQSService messageSQSService = new MessageSQSService(sqs);
-////        messageSQSService.setSqsUrl("https://sqs.us-east-1.amazonaws.com/452279762309/NationalParkReservation-dev");
-////        return messageSQSService;
-////    }
+//    @Profile({"dev","test","stage","prod"})
+//    public MessageSQSService getMessageSQSService(){
+//        AmazonSQS sqs= AmazonSQSClientBuilder.defaultClient();
+//        MessageSQSService messageSQSService = new MessageSQSService(sqs);
+//        messageSQSService.setSqsUrl("https://sqs.us-east-1.amazonaws.com/452279762309/NationalParkReservation-dev");
+//        return messageSQSService;
+//    }
 
     @Bean
     @Profile({"dev","test","stage","prod"})
