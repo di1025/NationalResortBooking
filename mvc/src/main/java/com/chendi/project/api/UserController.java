@@ -28,9 +28,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@ResponseBody
-@RequestMapping(value={"/api/users"}) // url specification
+@ResponseBody//activate Json view resolver
+@RequestMapping(value={"/api/users","/api/user"}) // url specification
 public class UserController {
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired

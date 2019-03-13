@@ -7,11 +7,13 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
@@ -25,11 +27,11 @@ import javax.jms.Session;
 public class JmsConfig {
 
 //    @Value("${aws.region}")
-    private String region="us-east-1";
+//    private String region="us-east-1";
 
     @Bean(name="connectionFactory")
     public SQSConnectionFactory getSQSConnectionFactory(){
-    AmazonSQS amazonSQSClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).withRegion(region).build();
+    AmazonSQS amazonSQSClient = AmazonSQSClientBuilder.defaultClient();
     SQSConnectionFactory factory = new SQSConnectionFactory(new ProviderConfiguration(),amazonSQSClient);
     return factory;
 }
@@ -64,5 +66,12 @@ public class JmsConfig {
 //        AmazonSQS client= AmazonSQSClientBuilder.defaultClient();
         AmazonSQS client = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         return client;
+    }
+
+    @Bean(name = "sqsAWSPropertiesSpringBoot")
+    public PropertiesFactoryBean getSQSProperties(){
+        PropertiesFactoryBean sqsAWSProperties = new PropertiesFactoryBean();
+        sqsAWSProperties.setLocation(new ClassPathResource("META-INF/env/sqsAWSPropertiesSpringBoot.properties"));
+        return sqsAWSProperties;
     }
 }

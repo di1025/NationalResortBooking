@@ -30,7 +30,7 @@ public class MessageSQSController {
     public Boolean sendMessageRequest(@RequestParam(value = "messageBody") String messageBody){
 //        Map<Long,String> result=new HashMap<>();
         String result;
-        try{messageSQSService.sendMessageRequest(messageBody,5);
+        try{messageSQSService.sendMessageRequest(messageBody,0);
             result = messageBody;
             return true;
         }

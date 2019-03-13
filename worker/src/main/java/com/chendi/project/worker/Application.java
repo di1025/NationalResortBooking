@@ -1,21 +1,20 @@
 package com.chendi.project.worker;
 
-import java.util.Arrays;
-
-import com.chendi.project.worker.service.SQSMessageService;
-import org.springframework.boot.CommandLineRunner;
+//import com.chendi.project.worker.service.SQSMessageService;
+import com.chendi.project.worker.service.SyncMessageReceiver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+
+import javax.jms.JMSException;
 
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JMSException {
         ApplicationContext app=SpringApplication.run(Application.class, args);
-        SQSMessageService messageService=app.getBean(SQSMessageService.class);
-        messageService.receiveMessage();
+        SyncMessageReceiver syncMessageReceiver = app.getBean(SyncMessageReceiver.class);
+        syncMessageReceiver.receiveSyncMessages();
     }
 
 //    @Bean

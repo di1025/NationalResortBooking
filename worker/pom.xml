@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
@@ -45,6 +45,19 @@
                 <version>1.0.4</version>
                 <type>jar</type>
             </dependency>
+        <!-- https://mvnrepository.com/artifact/org.janusgraph/example-common -->
+        <dependency>
+            <groupId>org.janusgraph</groupId>
+            <artifactId>example-common</artifactId>
+            <version>0.3.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tinkerforge</groupId>
+            <artifactId>tinkerforge</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
     </dependencies>
 
 

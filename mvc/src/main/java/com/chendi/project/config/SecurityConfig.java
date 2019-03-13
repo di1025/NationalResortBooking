@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.inMemoryAuthentication().withUser(“user1”)
 //            .password(“{noop}password”).roles(“REGISTERED_USER”);
 //    }
-//
+
 //    protected void configure(HttpSecurity http) throws Exception{
 //        http.csrf().disable()
 //                .authorizeRequests()

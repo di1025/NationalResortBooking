@@ -90,7 +90,7 @@ public class DataBaseConfig {
         return factoryBean;
     }
 
-    @Bean(name="entityManagerFactory")
+    @Bean(name="entityManagerFactory")//manage all the entity, eg: many to one, one to many relationship. use @Entity to enable.
     @Profile({"dev","test","stage","prod"})//means when using this unit profile, excute this bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
