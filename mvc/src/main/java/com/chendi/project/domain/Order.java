@@ -29,7 +29,6 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "order",cascade = CascadeType.ALL)
-//    @Column(name="payment_id")
     private List<Payment> payments;
 
     @Column(name="paid_date")

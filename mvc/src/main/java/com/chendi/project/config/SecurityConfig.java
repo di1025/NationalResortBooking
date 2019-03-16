@@ -60,13 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception{
 //
-        http.csrf().disable()
+        http.csrf().disable()//http tag
                 .addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup","/api/users/signup","/api/image").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER")
-         //.authenticated()
-//         .and().formLogin();
            .and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
      }
 }
