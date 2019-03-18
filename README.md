@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # National Park's Resorts Booking
 
 
