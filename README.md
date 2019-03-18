@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # National Park's Resorts Booking
 
 
@@ -32,25 +32,25 @@ This application is developed in Spring Framework by using Spring Boot, Spring D
     
 * Project Approach:
 
-3. Created User, Order, Payment, Room, Resort, Park domain
+1. Created User, Order, Payment, Room, Resort, Park domain
 
-4. Used Hibernate to do the database schema migration
+2. Used Hibernate to do the database schema migration
 
-5. Used JDBC to connect project with Postgres
+3. Used JDBC to connect project with Postgres
 
-8. Configured Spring Security for Authentication
+4. Configured Spring Security for Authentication
 
-6. Created repository, service and did test
+5. Created repository, service and did test
 
-7. Did mock test for AWS S3 Storage service
+6. Did mock test for AWS S3 Storage service
 
-9. Created Controllers and Restful APIs
+7. Created Controllers and Restful APIs
 
-10. Integrated third-party application AWS SQS and did Mock test
+8. Integrated third-party application AWS SQS and did Mock test
 
-11. Used Postman to interact with back-end project
+9. Used Postman to interact with back-end project
 
-12. Package my project into a Docker image
+10. Package my project into a Docker image
 
 # Configure local environment
 
