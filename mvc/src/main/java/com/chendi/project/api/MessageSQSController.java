@@ -30,7 +30,12 @@ public class MessageSQSController {
     public Boolean sendMessageRequest(@RequestParam(value = "messageBody") String messageBody){
 //        Map<Long,String> result=new HashMap<>();
         String result;
+<<<<<<< HEAD
         try{messageSQSService.sendMessageRequest(messageBody,0);
+=======
+        try{messageSQSService.sendMessageRequest(messageBody,5);
+            result = messageBody;
+>>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684
             return true;
         }
         catch(ServiceException e){ //compile exception(not runtime exception)

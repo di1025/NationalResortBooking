@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # National Park's Resorts Booking
 
 
@@ -206,3 +207,6 @@ mvn compile test -Dspring.profiles.active=${env} -P ${env}
 mvn compile package -DoutputDirectory=./target -P dev
 ```
 ￼
+=======
+# NationalResortBooking
+>>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684
