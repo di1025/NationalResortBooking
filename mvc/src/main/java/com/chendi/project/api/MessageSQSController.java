@@ -31,7 +31,6 @@ public class MessageSQSController {
 //        Map<Long,String> result=new HashMap<>();
         String result;
         try{messageSQSService.sendMessageRequest(messageBody,0);
-            result = messageBody;
             return true;
         }
         catch(ServiceException e){ //compile exception(not runtime exception)
