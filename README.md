@@ -125,9 +125,26 @@ POST - http://localhost:8080/api/users/signup
 	"phone":"99999999"
 }
 ```
+
+ Responsebody
+```$xslt
+{
+    "firstName": "testFN",
+    "lastName": "testLN",
+    "username": "username4",
+    "email": "testEmail4",
+    "phone": "99999999",
+    "password": "$2a$10$WJi7R6dAlFfFnlxLH3OX4.84YVQy3iPps7cmQ1INPWatvT6XxSnCS",
+    "id": 22,
+    "enabled": true,
+    "accountNonExpired": true,
+    "accountNonLocked": true,
+    "credentialsNonExpired": true
+}
+```
 Postman snapshoot for user sign up
 
-![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/signUp.png?raw=true)
+![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/sign%20up.png?raw=true)
 
 * User login
 
@@ -141,5 +158,31 @@ POST http://localhost:8080/api/users/login
 	"password": "testPassword"
 }
 ```
+Responsebody
+```$xslt
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcm5hbWUzIiwiYXVkaWVuY2UiOiJhdWRpZW5jZSIsImNyZWF0ZWQiOjE1NTMwMTEyNTE4NzcsImV4cCI6MTU1MzA5NzY1MX0.jV0e6fHC1JLxSfoNtAaVqL4ouKyNswnA3m4oGHCVj5V6vdrwmHB0glAx-E2Dxgxg0BXgdLU2eUgrrWbMZSjr1A"
+}
+```
+
 Postman snapshoot for user login
 ![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/user%20login%20.png?raw=true)
+
+* post image to AWS S3
+
+```$xslt
+POST http://localhost:8080/api/image
+```
+Postman snapshoot for uploading a image to S3
+
+![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/AWS%20S3.png?raw=true)
+
+* send message to AWS SQS
+
+```$xslt
+POST http://localhost:8080/api/message
+```
+
+Postman snapshoot for sending messages to SQS
+![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/SQS%20consumer.png?raw=true)
+
