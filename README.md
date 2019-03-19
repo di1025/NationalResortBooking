@@ -125,3 +125,21 @@ POST - http://localhost:8080/api/users/signup
 	"phone":"99999999"
 }
 ```
+Postman snapshoot for user sign up
+
+![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/signUp.png?raw=true)
+
+* User login
+
+```$xslt
+POST http://localhost:8080/api/users/login
+```
+ Requestbody
+ ```$xslt
+{ 
+	"username": "testusername3",
+	"password": "testPassword"
+}
+```
+Postman snapshoot for user login
+![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/user%20login%20.png?raw=true)
