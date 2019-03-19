@@ -47,14 +47,14 @@ public class ImageController {
         }
         return null;
     }
-<<<<<<< HEAD
-//url,s3key(uuid+extension),uuid,bucket,extension,userid
-    //twillio
-=======
 
 //url,s3key(uuid+extension),uuid,bucket,extension,userid
     //twillio
 
 
->>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684
+//url,s3key(uuid+extension),uuid,bucket,extension,userid
+    //twillio
+
+
+
 }
