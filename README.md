@@ -145,7 +145,6 @@ POST - http://localhost:8080/api/users/signup
 Postman snapshoot for user sign up
 
 ![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/sign%20up.png?raw=true)
-
 ### User login
 
 ```$xslt
