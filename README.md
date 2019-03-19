@@ -110,7 +110,7 @@ database.password=${password}
 mvn compile package -DoutputDirectory=./target -P dev
 ```
 ## Reference Demo
-* User sign up
+### User sign up
 ```$xslt
 POST - http://localhost:8080/api/users/signup
 ```
@@ -146,7 +146,7 @@ Postman snapshoot for user sign up
 
 ![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/sign%20up.png?raw=true)
 
-* User login
+### User login
 
 ```$xslt
 POST http://localhost:8080/api/users/login
@@ -168,7 +168,7 @@ Responsebody
 Postman snapshoot for user login
 ![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/user%20login%20.png?raw=true)
 
-* post image to AWS S3
+### post image to AWS S3
 
 ```$xslt
 POST http://localhost:8080/api/image
@@ -177,7 +177,7 @@ Postman snapshoot for uploading a image to S3
 
 ![](https://github.com/di1025/NationalResortBooking/blob/master/READMESnapshoot/AWS%20S3.png?raw=true)
 
-* send message to AWS SQS
+### send message to AWS SQS
 
 ```$xslt
 POST http://localhost:8080/api/message
