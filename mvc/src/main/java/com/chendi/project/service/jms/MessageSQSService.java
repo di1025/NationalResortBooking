@@ -47,12 +47,12 @@ public class MessageSQSService {
     public void setSqsUrl(String url){
         this.sqsUrl=url;
     }
+
+
+
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
-
-
-
 
 
 
@@ -74,10 +74,6 @@ public class MessageSQSService {
 
 
 //    List<Message> messages = sqs.receiveMessage(sqsUrl).getMessages();
-
-
-
-
 
 
 

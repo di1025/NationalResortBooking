@@ -1,7 +1,7 @@
 
 # National Park's Resorts Booking
 
-##Overview
+ ##Overview
 
 * Project Original Thoughts:
 
@@ -101,13 +101,11 @@ database.port=${port}
 database.name=${name}
 database.username=${username}
 database.password=${password}
-
-
 ```
 
 ## Create war package file
 ```$xslt
-mvn compile package -DoutputDirectory=./target -P dev
+mvn compile package -P dev -DskipTests=true
 ```
 ## Reference Demo
 ### User sign up
