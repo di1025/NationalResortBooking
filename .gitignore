@@ -5,3 +5,6 @@ target
 .DS_Store
 *.war
 *.jar
+worker/target
+ops/container/worker-0.1.0.jar
+worker-0.1.0.jar.original
