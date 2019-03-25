@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-//package com.chendi.project.worker.service;
+package com.chendi.project.worker.service;
 //
 //import com.amazonaws.services.sqs.AmazonSQS;
 //import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
@@ -47,8 +46,6 @@
 //        }
 //    }
 //}
-=======
-package com.chendi.project.worker.service;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
@@ -70,10 +67,8 @@ public class SQSMessageService {
     private AmazonSQS sqsClient= AmazonSQSClientBuilder.defaultClient();
 //    AmazonSQS client = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
 
-
-
-//    @Value("${jms.queue.name}")
-    private String queueNames="NationalParkReservation-dev";
+    @Value("#{ sqsAWSPropertiesSpringBoot['sqs.name'] }")
+    private String queueNames;
 
     public String getQueueUrl(String queueName) {
         String queueUrl = sqsClient.getQueueUrl(queueName).getQueueUrl();
@@ -99,4 +94,3 @@ public class SQSMessageService {
     }
 
 }
->>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684

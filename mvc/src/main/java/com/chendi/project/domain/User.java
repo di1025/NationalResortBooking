@@ -84,18 +84,24 @@ public class User implements UserDetails {
     public List<Order> getOrders() { return orders; }
 
 //    public void setLastResetAt(Instant lastResetAt) { this.lastResetAt = lastResetAt; }
+
 //    public Instant getLastResetAt() { return lastResetAt; }
 
-
     public Long getId(){return this.id;}
+
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired(){return true;}
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked(){return true;}
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired(){return true;}
+    @JsonIgnore
     @Override
     public boolean isEnabled(){return true;}
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

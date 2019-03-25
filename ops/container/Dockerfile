@@ -1,6 +1,6 @@
 FROM tomcat:9.0.16-jre8
 
-MAINTAINER Pigge
+MAINTAINER Di
 ARG APP_ENV=test
 ENV APP_ENV ${APP_ENV}
 

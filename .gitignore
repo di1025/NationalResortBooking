@@ -2,9 +2,6 @@ target
 .idea
 *.iml
 *.class
-<<<<<<< HEAD
 .DS_Store
 *.war
-=======
-.DS_Store
->>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684
+*.jar

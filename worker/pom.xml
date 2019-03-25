@@ -19,11 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-<<<<<<< HEAD
             <artifactId>spring-boot-starter-activemq</artifactId>
-=======
-            <artifactId>spring-boot-starter-web</artifactId>
->>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
@@ -49,7 +45,6 @@
                 <version>1.0.4</version>
                 <type>jar</type>
             </dependency>
-<<<<<<< HEAD
         <!-- https://mvnrepository.com/artifact/org.janusgraph/example-common -->
         <dependency>
             <groupId>org.janusgraph</groupId>
@@ -63,8 +58,6 @@
             <version>2.1.1</version>
         </dependency>
 
-=======
->>>>>>> a995a57da298914c67bafe2a5c39d7d11e7cd684
     </dependencies>
 
 
