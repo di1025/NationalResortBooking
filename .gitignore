@@ -11,3 +11,4 @@ worker-0.1.0.jar.original
 **/META-INF/env/*.properties
 **/META-INF/*.properties
 !application-template.properties
+/resources/log4j.properties
