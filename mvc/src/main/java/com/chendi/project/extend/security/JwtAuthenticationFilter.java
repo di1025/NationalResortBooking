@@ -38,10 +38,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //TODO extract token from bearer
         //TODO get header and username info from token;
         //TODO authentication user based on info in step 2
-        String tokenHeader = request.getHeader(this.tokenHeader);//use tokenHeader(key) to return the token (value)
+        String tokenHeader = request.getHeader(this.tokenHeader);//use tokenHeader(Json's key) to return the token containing beearer(Json's value)
         if (tokenHeader != null && tokenHeader.startsWith(bear)) {
             String authToken = tokenHeader.substring(7);
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            logger.info("Checking authentication for user " + username);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -54,10 +55,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 } else {
                     logger.warn("token is no longer valid");
                 }
-            } else {
-                logger.info("token doesn't container jwt bearer header");
             }
         }
+            else {
+                logger.info("token doesn't contain jwt bearer header");
+            }
+
         chain.doFilter(request, response);
     }
 }

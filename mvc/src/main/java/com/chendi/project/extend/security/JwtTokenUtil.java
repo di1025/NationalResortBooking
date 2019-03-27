@@ -130,6 +130,6 @@ public class JwtTokenUtil {
         return (
                 username.equals(user.getUsername())
                 && !isTokenExpired(token));
-     //           && !isCreatedBeforeLastPasswordReset(created,Date.from(user.getLastResetAt())));
+//                && !isCreatedBeforeLastPasswordReset(created,Date.from(user.getLastResetAt())));
     }
 }
