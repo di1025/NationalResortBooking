@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .formLogin();
 //    }
 
-
     //step 2
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -56,7 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
     protected void configure(HttpSecurity http) throws Exception{
 //
         http.csrf().disable()//http tag
@@ -64,6 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup","/api/users/signup","/api/image").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER")
-           .and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
+           .and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
+        .and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
      }
 }
