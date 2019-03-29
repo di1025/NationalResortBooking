@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -56,11 +57,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     logger.warn("token is no longer valid");
                 }
             }
+        } else {
+            logger.info("token doesn't contain jwt bearer header");
         }
-            else {
-                logger.info("token doesn't contain jwt bearer header");
-            }
-
         chain.doFilter(request, response);
     }
 }
