@@ -48,4 +48,6 @@ public class PaymentController {
     public List <Payment> getPaymentByFirstNameAndLastName(@RequestParam(value="holderFirstName") String holderFirstName, @RequestParam(value = "holderLastName") String holderLastName){
         return paymentService.findByFirstNameAndLastName(holderFirstName,holderLastName);
     }
+
+
 }

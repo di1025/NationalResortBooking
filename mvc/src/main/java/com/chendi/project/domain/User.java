@@ -101,6 +101,7 @@ public class User implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isEnabled(){return true;}
+
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -83,7 +83,7 @@ mvn compile flyway:migrate -P unit -Ddb_username=${username} -Ddb_url=localhost:
 ```
 
 ## Testing
-* Package and install the basketball folder before unit test.
+* Package and install the folder before unit test.
 
 ```mvn clean compile install -DskipTests=true```
 * Tests are done using JUnit and Mockito. Tests are run using the command:

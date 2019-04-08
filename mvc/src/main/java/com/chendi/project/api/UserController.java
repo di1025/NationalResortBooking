@@ -56,10 +56,12 @@ public class UserController {
         return userService.findById(userId);
     }
 
+
     @RequestMapping(value="/signup", method = RequestMethod.POST)
     public User generateUser(@RequestBody User newUser){
         return userService.createNewUser(newUser);
     }
+
 
     @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
     public List<User> getUserByLN(@RequestParam(value = "lastName") String lastName) {
@@ -67,14 +69,10 @@ public class UserController {
         return userService.findByLastName(lastName);
     }
 
-
-
     @RequestMapping(method = RequestMethod.GET, params = {"phoneNumber"})
     public User getUserByPhoneNumber(@RequestParam(value = "phoneNumber") String phone) {
         logger.debug("parameter phone number is " + phone);
         return userService.findByPhoneNumber(phone); }
-
-
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> userLogin(@RequestBody UserLogin userLogin, Device device) {
@@ -90,6 +88,7 @@ public class UserController {
             try {
                 final UserDetails userDetails = userService.findByEmailOrUsername(userLogin.getUsername());
                 final String token = jwtTokenUtil.generateToken(userDetails, device);
+//                ResponseEntity re= new ResponseEntity(new JwtAuthenticationResponse(token),HttpStatus.OK);
                 return ResponseEntity.ok(new JwtAuthenticationResponse(token));
 //    above equals to    JwtAuthenticationResponse jsontoken= new JwtAuthenticationResponse(token);
 //                return new ResponseEntity<>(HttpStatus.ok);
@@ -103,3 +102,4 @@ public class UserController {
 }
 
 //userDetail
+
