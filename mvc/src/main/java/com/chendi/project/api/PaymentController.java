@@ -50,4 +50,8 @@ public class PaymentController {
     }
 
 
+    @RequestMapping( method=RequestMethod.GET,params = {"orderId","s"})
+    public List<Payment> getPayById(@RequestParam(value="orderId") Long id,@RequestParam(value="s") String s){
+        return paymentService.findByOrderId(id);
+    }
 }
